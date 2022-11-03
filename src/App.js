@@ -4,6 +4,8 @@ import "./App.css";
 
 import Registro from "./components.js/Registro";
 import { Route, Routes } from "react-router";
+import GrillaDeProductos from './components/GrillaDeProductos';
+
 
 function App() {
   return (
