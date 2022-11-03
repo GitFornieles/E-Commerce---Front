@@ -1,25 +1,100 @@
-import React from "react";
-
+import React, { useState } from "react";
+import axios from "axios";
 const Registro = () => {
+  const [users, setUsers] = useState([]);
+
+  const [dni, setDni] = useState([]);
+  const [nickName, setNickName] = useState("");
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [lastname, setLastName] = useState("");
+  const [edad, setEdad] = useState([]);
+  const [direccion, setDireccion] = useState([]);
+  const [ciudad, setCiudad] = useState("");
+  const [postal, setPostal] = useState([]);
+  const [telefono, setTel] = useState([]);
+  const [pass, setPass] = useState([]);
+  const handleChangeDni = (e) => {
+    setDni(e.target.value);
+  };
+  const handleChangesetNickName = (e) => {
+    setNickName(e.target.value);
+  };
+  const handleChangesetEmail = (e) => {
+    setEmail(e.target.value);
+  };
+  const handleChangesetName = (e) => {
+    setName(e.target.value);
+  };
+  const handleChangesetLastName = (e) => {
+    setLastName(e.target.value);
+  };
+  const handleChangesetEdad = (e) => {
+    setEdad(e.target.value);
+  };
+  const handleChangesetDireccion = (e) => {
+    setDireccion(e.target.value);
+  };
+  const handleChangesetCiudad = (e) => {
+    setCiudad(e.target.value);
+  };
+  const handleChangesetPostal = (e) => {
+    setPostal(e.target.value);
+  };
+  const handleChangesetTel = (e) => {
+    setTel(e.target.value);
+  };
+  const handleChangesetPass = (e) => {
+    setPass(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("HOLA");
+    axios
+
+      .post("http://localhost:8000/api/users/new", {
+        dni: dni,
+        nickname: nickName,
+        email: email,
+        name: name,
+        lastname: lastname,
+        age: edad,
+        address: direccion,
+        city: ciudad,
+        postalCode: postal,
+        password: pass,
+        cellphone: telefono,
+      })
+      .then((res) => res.data)
+      .then((user) => {
+        console.log(user);
+        setUsers(user);
+      });
+  };
   return (
     <div>
       <h1>Registro</h1>
 
       <div className="container">
-        <form className="row">
+        <form className="row" onSubmit={handleSubmit}>
           <div>
             <label>dni:</label>
             <input
+              value={dni}
+              onChange={handleChangeDni}
               type="dni"
               className="form-control"
-              id="floatingInput"
+              id="floatingDni"
               placeholder="Dni"
             />
           </div>
           <div>
             <label>nickName:</label>
             <input
-              type="nickName"
+              value={nickName}
+              onChange={handleChangesetNickName}
+              type="nickname"
               className="form-control"
               id="floatingnickName"
               placeholder="Apodo"
@@ -28,6 +103,8 @@ const Registro = () => {
           <div>
             <label>Email:</label>
             <input
+              value={email}
+              onChange={handleChangesetEmail}
               type="email"
               className="form-control"
               id="floatingEmail"
@@ -37,6 +114,8 @@ const Registro = () => {
           <div>
             <label>Name:</label>
             <input
+              value={name}
+              onChange={handleChangesetName}
               type="name"
               className="form-control"
               id="floatingName"
@@ -46,60 +125,74 @@ const Registro = () => {
           <div>
             <label>Last Name:</label>
             <input
+              value={lastname}
+              onChange={handleChangesetLastName}
               type="lastname"
               className="form-control"
-              id="floatingInput"
+              id="floatingLastName"
               placeholder="Apellido"
             />
           </div>
           <div>
             <label>Edad:</label>
             <input
+              value={edad}
+              onChange={handleChangesetEdad}
               type="age"
               className="form-control"
-              id="floatingInput"
+              id="floatingAge"
               placeholder="Edad"
             />
           </div>
           <div>
             <label>Direccion:</label>
             <input
+              value={direccion}
+              onChange={handleChangesetDireccion}
               type="address"
               className="form-control"
-              id="floatingInput"
+              id="floatingDireccion"
               placeholder="Direccion"
             />
           </div>
           <div>
             <label>Ciudad:</label>
             <input
+              value={ciudad}
+              onChange={handleChangesetCiudad}
               type="city"
               className="form-control"
-              id="floatingInput"
+              id="floatingCiudad"
               placeholder="Ciudad"
             />
           </div>
           <div>
             <label>Codigo Postal:</label>
             <input
+              value={postal}
+              onChange={handleChangesetPostal}
               type="postalCode"
               className="form-control"
-              id="floatingInput"
+              id="floatingPostal"
               placeholder="codigo postal"
             />
           </div>
           <div>
             <label>Telefono:</label>
             <input
+              value={telefono}
+              onChange={handleChangesetTel}
               type="cellphone"
               className="form-control"
-              id="floatingInput"
+              id="floatingTelefono"
               placeholder="Telefono"
             />
           </div>
           <div>
             <label>Contraseña:</label>
             <input
+              value={pass}
+              onChange={handleChangesetPass}
               type="password"
               className="form-control"
               id="floatingPassword"
