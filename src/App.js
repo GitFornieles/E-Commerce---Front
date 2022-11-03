@@ -1,10 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+// import logo from './logo.svg';
+import "./App.css";
+import ProductCard from "./commons/ProductCard";
+import { Route, Routes } from "react-router";
 
 function App() {
   return (
     <div className="App">
-    holaaaa
+      <Routes>
+        <Route path="/velas" element={<ProductCard />} />
+      </Routes>
     </div>
   );
 }
