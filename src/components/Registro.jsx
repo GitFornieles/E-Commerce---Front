@@ -75,7 +75,6 @@ const Registro = () => {
   return (
     <div>
       <h1>Registro</h1>
-
       <div className="container">
         <form className="row" onSubmit={handleSubmit}>
           <div>
