@@ -2,8 +2,11 @@ import React from "react";
 import Logo from "../img/logo.jpg";
 import "../styles/Navbar.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const user=useSelector(state=>state.user)
+
   const imgStyles = {
     heigth: "150px",
     width: "150px",
