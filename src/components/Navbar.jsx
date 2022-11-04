@@ -23,9 +23,11 @@ const Navbar = () => {
                 Registro
               </button>
             </Link>
-            <button type="button" className="btn btn-secondary btn-sm">
-              Login
-            </button>
+            <Link to="/login">
+              <button type="button" className="btn btn-secondary btn-sm">
+                Login
+              </button>
+            </Link>
           </div>
           <div className="form-inline my-2 my-lg-0">
             <input

@@ -5,6 +5,7 @@ import ProductCard from "./commons/ProductCard";
 import Registro from "./components/Registro";
 import { Route, Routes } from "react-router";
 import GrillaDeProductos from "./components/GrillaDeProductos";
+import Login from "./components/Login";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/register" element={<Registro />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/velas" element={<ProductCard />} />
         <Route path="/grilla" element={<GrillaDeProductos />} />
       </Routes>
