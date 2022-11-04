@@ -1,6 +1,6 @@
 import React from "react";
 import imagen from "../assets/imagen.jpg";
-import GrillaDeProductos from "../Styles/GrillaDeProductos"
+import "../Styles/GrillaDeProductos.css"
 
 
 // este componente va a mostrar la grilla de productos

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "../styles/ProductCard.css";
+import "../Styles/ProductCard.css";
 
 const ProductCard = ({ user, product }) => {
   /*

@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import axios from "axios";
 import userReducer from "./user";
 
 const store = configureStore({
@@ -12,6 +11,8 @@ const store = configureStore({
 
 export default store
 
+/*
+--------> EJEMPLO:
 
     const handleAgregar=(e)=>{
         dispatch(agregarproducto(e.target.id))
@@ -37,3 +38,4 @@ const carrito= ()=>{
         <button id={product.id} onClick={handleAgregar}>Eliminar Producto</button>
     </>
 }
+*/

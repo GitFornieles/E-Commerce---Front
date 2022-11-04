@@ -1,11 +1,11 @@
 import React from "react";
 import Logo from "../img/logo.jpg";
-import "../styles/Navbar.css";
+import "../Styles/Navbar.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const user=useSelector(state=>state.user)
+  const user = useSelector((state) => state.user);
 
   const imgStyles = {
     heigth: "150px",
@@ -49,11 +49,11 @@ const Navbar = () => {
           <p> Sahumerios suaves y diferentes. Hechos artesanalmente</p>
         </div>
         <div className="m-0 row justify-content-center">
-          <img src={Logo} style={imgStyles} />
+          <img src={Logo} style={imgStyles} alt="logo" />
         </div>
       </div>
       <div className="separator">
-        <div className="separator__content">... </div>
+        <div className="separator__content"> </div>
 
         <div className="separator__separator"></div>
       </div>

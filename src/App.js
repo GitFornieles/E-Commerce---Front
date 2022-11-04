@@ -2,11 +2,9 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import "./App.css";
 import ProductCard from "./commons/ProductCard";
-import Registro from "./components.js/Registro";
+import Registro from "./components/Registro";
 import { Route, Routes } from "react-router";
-import GrillaDeProductos from './components/GrillaDeProductos';
-
-
+import GrillaDeProductos from "./components/GrillaDeProductos";
 
 function App() {
   return (
@@ -15,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/register" element={<Registro />} />
         <Route path="/velas" element={<ProductCard />} />
+        <Route path="/grilla" element={<GrillaDeProductos />} />
       </Routes>
     </div>
   );
