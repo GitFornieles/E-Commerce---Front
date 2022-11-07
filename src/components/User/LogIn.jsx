@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import { useInput } from "../../hooks/useInput";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import userLogin from "../../store/user";
+import { userLogin } from "../../store/user";
 import { Link } from "react-router-dom";
 
 const Login = () => {
@@ -18,23 +18,30 @@ const Login = () => {
 
     try {
       // POST user credentials:
-      const { data } = await axios.post("/api/login", {
-        userName: userName.value,
-        password: password.value,
-      });
+      const { data } = await axios.post(
+        "http://localhost:8000/api/users/login",
+        {
+          nickname: userName.value,
+          password: password.value,
+        }
+      );
 
       // Set userState:
-      dispatch(userLogin(data));
+      dispatch(userLogin(data.dataValues));
 
       // Store the user in localStorage to PERSIST:
-      localStorage.setItem("user", JSON.stringify(data));
+      localStorage.setItem("user", JSON.stringify(data.dataValues));
 
       // Redirect to home page
       navigate("/");
-    } catch {}
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  console.log(user);
+  const handleUser = () => {
+    console.log(user);
+  };
 
   return (
     <div>
@@ -42,11 +49,16 @@ const Login = () => {
         <Link to="/">
           <button className="btn btn-secondary btn-sm">Home</button>
         </Link>
+
+        <button className="btn btn-secondary btn-sm" onClick={handleUser}>
+          USER
+        </button>
       </div>
+
       <h1>Login</h1>
 
       <div className="container">
-        <form className="row">
+        <form className="row" onSubmit={handleSubmit}>
           <div>
             <label>Nombre de Usuario:</label>
             <input
@@ -67,11 +79,7 @@ const Login = () => {
               {...password}
             />
           </div>
-          <button
-            type="submit"
-            className="btn btn-primary"
-            onSubmit={handleSubmit}
-          >
+          <button type="submit" className="btn btn-primary">
             Submit
           </button>
         </form>

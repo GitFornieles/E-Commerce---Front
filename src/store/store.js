@@ -8,8 +8,7 @@ const store = configureStore({
   },
 });
 
-
-export default store
+export default store;
 
 /*
 --------> EJEMPLO:
