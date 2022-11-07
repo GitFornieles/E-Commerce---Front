@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useInput } from "../hooks/useInput";
+import { useInput } from "../../hooks/useInput";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import userLogin from "../store/user";
+import userLogin from "../../store/user";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const userName = useInput("userName");
@@ -37,6 +38,11 @@ const Login = () => {
 
   return (
     <div>
+      <div>
+        <Link to="/">
+          <button className="btn btn-secondary btn-sm">Home</button>
+        </Link>
+      </div>
       <h1>Login</h1>
 
       <div className="container">
