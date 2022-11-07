@@ -78,11 +78,20 @@ const Login = () => {
               placeholder="Escribi tu contraseña"
               {...password}
             />
+            <br />
           </div>
           <button type="submit" className="btn btn-primary">
-            Submit
+            Iniciar Sesión
           </button>
         </form>
+        <br />
+        <div>
+          <Link to="/login/admin">
+            <button type="submit" className="btn btn-secondary">
+              Iniciar sesión como Admin
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );
