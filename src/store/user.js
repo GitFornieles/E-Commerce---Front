@@ -4,6 +4,9 @@ import { createAction, createReducer } from "@reduxjs/toolkit";
 export const userLogin = createAction("LOGIN");
 export const userLogOut = createAction("LOGOUT");
 
+// Constante que chequea si hay algun usuario guardado en el localStorage:
+const storedUser = JSON.parse(localStorage.getItem("user")) || {};
+
 const initialState = {
   dni: "",
   nickName: "",
@@ -20,11 +23,12 @@ const initialState = {
 
 //combinamos todas las acciones en un reducer
 
-const userReducer = createReducer(initialState, {
-  [userLogin]: (state, action) => {
-    return action.payload;
-  },
+const userReducer = createReducer(storedUser, {
+  [userLogin]: (state, action) => action.payload,
   [userLogOut]: (state, action) => {
+    // Vacio el localStorage:
+    localStorage.removeItem("user");
+
     return initialState;
   },
 });
