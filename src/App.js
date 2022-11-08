@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 import "./App.css";
 import ProductCard from "./commons/ProductCard";
 import Registro from "./components/User/Registro";

@@ -1,28 +1,11 @@
 import React from "react";
-import "../Styles/Navbar.css";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
-import { userLogOut } from "../store/user";
+import "../../Styles/Navbar.css";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import UserButton from "./UserButton";
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const handleLogOut = async () => {
-    try {
-      await axios.post("http://localhost:8000/api/users/logout");
-
-      // Setteo un user vacio:
-      dispatch(userLogOut());
-
-      // Vuelvo a la pagina de inicio:
-      navigate("/");
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   return (
     <div>
@@ -30,16 +13,7 @@ const Navbar = () => {
         <div className="container">
           <>
             {user.name ? (
-              <div className="col-md-4 col-xs-4">
-                <h3>{user.nickname}</h3>
-                <button
-                  type="button"
-                  className="btn btn-primary btn-sm"
-                  onClick={handleLogOut}
-                >
-                  Log Out
-                </button>
-              </div>
+              <UserButton />
             ) : (
               <div className="col-md-4 col-xs-4">
                 <Link to="/register">
@@ -49,7 +23,7 @@ const Navbar = () => {
                 </Link>
                 <Link to="/login">
                   <button type="button" className="btn btn-secondary btn-sm">
-                    Login
+                    Log in
                   </button>
                 </Link>
               </div>
