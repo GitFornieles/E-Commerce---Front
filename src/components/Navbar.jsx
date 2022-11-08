@@ -1,9 +1,15 @@
 import React from "react";
-import "../Styles/Navbar.css";
+import Logo from "../img/logo.jpg";
+import "../styles/Navbar.css";
+
+
+
+
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { userLogOut } from "../store/user";
+
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
