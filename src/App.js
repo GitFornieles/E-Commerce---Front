@@ -12,9 +12,10 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/register" element={<Registro />} />
-        <Route path="/velas" element={<ProductCard />} />
+        <Route path="/grilla/:id" element={<ProductCard />} />
         <Route path="/grilla" element={<GrillaDeProductos />} />
       </Routes>
+
     </div>
   );
 }
