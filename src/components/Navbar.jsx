@@ -64,9 +64,11 @@ const Navbar = () => {
               aria-label="Search"
             />
           </div>
-          <button>
-            <ion-icon name="cart-sharp"></ion-icon>
-          </button>
+          <Link to="/carrito">
+            <button>
+              <ion-icon name="cart-sharp"></ion-icon>
+            </button>
+          </Link>
         </div>
       </nav>
     </div>
