@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+
 const Registro = () => {
   const [users, setUsers] = useState([]);
 
@@ -14,6 +16,9 @@ const Registro = () => {
   const [postal, setPostal] = useState([]);
   const [telefono, setTel] = useState([]);
   const [pass, setPass] = useState([]);
+
+  const navigate = useNavigate();
+
   const handleChangeDni = (e) => {
     setDni(e.target.value);
   };
@@ -50,7 +55,7 @@ const Registro = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("HOLA");
+
     axios
 
       .post("http://localhost:8000/api/users/new", {
@@ -70,26 +75,44 @@ const Registro = () => {
       .then((user) => {
         console.log(user);
         setUsers(user);
-      });
+      })
+      .then(() => navigate("/login"));
   };
   return (
     <div>
+      <div>
+        <Link to="/">
+          <button className="btn btn-secondary btn-sm">Home</button>
+        </Link>
+      </div>
+
       <h1>Registro</h1>
       <div className="container">
         <form className="row" onSubmit={handleSubmit}>
           <div>
-            <label>dni:</label>
+            <label>Nombre:</label>
             <input
-              value={dni}
-              onChange={handleChangeDni}
-              type="dni"
+              value={name}
+              onChange={handleChangesetName}
+              type="name"
               className="form-control"
-              id="floatingDni"
-              placeholder="Dni"
+              id="floatingName"
+              placeholder="Name"
             />
           </div>
           <div>
-            <label>nickName:</label>
+            <label>Apellido:</label>
+            <input
+              value={lastname}
+              onChange={handleChangesetLastName}
+              type="lastname"
+              className="form-control"
+              id="floatingLastName"
+              placeholder="Apellido"
+            />
+          </div>
+          <div>
+            <label>Nombre de Usuario:</label>
             <input
               value={nickName}
               onChange={handleChangesetNickName}
@@ -99,6 +122,18 @@ const Registro = () => {
               placeholder="Apodo"
             />
           </div>
+          <div>
+            <label>D.N.I:</label>
+            <input
+              value={dni}
+              onChange={handleChangeDni}
+              type="dni"
+              className="form-control"
+              id="floatingDni"
+              placeholder="Dni"
+            />
+          </div>
+
           <div>
             <label>Email:</label>
             <input
@@ -110,28 +145,7 @@ const Registro = () => {
               placeholder="Email"
             />
           </div>
-          <div>
-            <label>Name:</label>
-            <input
-              value={name}
-              onChange={handleChangesetName}
-              type="name"
-              className="form-control"
-              id="floatingName"
-              placeholder="Name"
-            />
-          </div>
-          <div>
-            <label>Last Name:</label>
-            <input
-              value={lastname}
-              onChange={handleChangesetLastName}
-              type="lastname"
-              className="form-control"
-              id="floatingLastName"
-              placeholder="Apellido"
-            />
-          </div>
+
           <div>
             <label>Edad:</label>
             <input
@@ -144,14 +158,14 @@ const Registro = () => {
             />
           </div>
           <div>
-            <label>Direccion:</label>
+            <label>Dirección:</label>
             <input
               value={direccion}
               onChange={handleChangesetDireccion}
               type="address"
               className="form-control"
               id="floatingDireccion"
-              placeholder="Direccion"
+              placeholder="Dirección"
             />
           </div>
           <div>
@@ -166,37 +180,53 @@ const Registro = () => {
             />
           </div>
           <div>
-            <label>Codigo Postal:</label>
+            <label>Código Postal:</label>
             <input
               value={postal}
               onChange={handleChangesetPostal}
               type="postalCode"
               className="form-control"
               id="floatingPostal"
-              placeholder="codigo postal"
+              placeholder="Código Postal"
             />
           </div>
           <div>
-            <label>Telefono:</label>
+            <label>Teléfono:</label>
             <input
               value={telefono}
               onChange={handleChangesetTel}
               type="cellphone"
               className="form-control"
               id="floatingTelefono"
-              placeholder="Telefono"
+              placeholder="Teléfono"
             />
           </div>
           <div>
             <label>Contraseña:</label>
-            <input
-              value={pass}
-              onChange={handleChangesetPass}
-              type="password"
-              className="form-control"
-              id="floatingPassword"
-              placeholder="Contraseña"
-            />
+            {pass.length >= 8 ? (
+              <input
+                value={pass}
+                onChange={handleChangesetPass}
+                type="password"
+                className="form-control"
+                id="floatingPassword"
+                placeholder="Contraseña"
+              />
+            ) : (
+              <div>
+                <input
+                  value={pass}
+                  onChange={handleChangesetPass}
+                  type="password"
+                  className="form-control"
+                  id="floatingPassword"
+                  placeholder="Contraseña"
+                />
+                <p className="card-text text-danger">
+                  <small>{`Contraseña debe ser de por lo menos 8 caracteres`}</small>
+                </p>
+              </div>
+            )}
           </div>
           <button type="submit" className="btn btn-primary">
             Enviar
