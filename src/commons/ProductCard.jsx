@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "../styles/ProductCard.css";
+import "../Styles/ProductCard.css";
 import { useLocation } from "react-router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";

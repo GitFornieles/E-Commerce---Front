@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
-import "../styles/GrillaDeProductos.css";
+import "../Styles/GrillaDeProductos.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
