@@ -29,15 +29,17 @@ const Navbar = () => {
           </div>
           <div className="form-inline my-2 my-lg-0">
             <input
-              class="form-control mr-sm-2"
+              className="form-control mr-sm-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
             />
           </div>
-          <button>
-            <ion-icon name="cart-sharp"></ion-icon>
-          </button>
+          <Link to="/carrito">
+            <button>
+              <ion-icon name="cart-sharp"></ion-icon>
+            </button>
+          </Link>
         </div>
       </nav>
       <div className="corner-ribbon">
