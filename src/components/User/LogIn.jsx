@@ -49,10 +49,6 @@ const Login = () => {
         <Link to="/">
           <button className="btn btn-secondary btn-sm">Home</button>
         </Link>
-
-        <button className="btn btn-secondary btn-sm" onClick={handleUser}>
-          USER
-        </button>
       </div>
 
       <h1>Login</h1>
