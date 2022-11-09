@@ -22,8 +22,8 @@ const UsersList = () => {
   return (
     <div>
       {user.admin ? (
-        <section>
-          <table>
+        <section className="pt-4">
+          <table className="table is-hoverable is-fullwidth">
             <thead>
               <tr>
                 <th>USUARIOS</th>

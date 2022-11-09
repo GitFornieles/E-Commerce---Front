@@ -24,9 +24,17 @@ const UserItem = ({ user }) => {
       <td>{user.admin ? <h3>✓</h3> : <h3>✖️</h3>}</td>
       <td>
         {user.admin ? (
-          <button onClick={removeAdmin}>Remover Admin</button>
+          <div class="buttons">
+            <button class="button is-warning is-light" onClick={removeAdmin}>
+              Remover Admin
+            </button>
+          </div>
         ) : (
-          <button onClick={handleAdmin}>Promover Admin</button>
+          <div class="buttons">
+            <button class="button is-success is-light" onClick={handleAdmin}>
+              Promover Admin
+            </button>
+          </div>
         )}
       </td>
     </tr>
