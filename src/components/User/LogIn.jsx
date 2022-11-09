@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../../store/user";
 import { Link } from "react-router-dom";
+import { setCart } from "../../store/cart";
 
 const Login = () => {
   const userName = useInput("userName");
@@ -28,9 +29,11 @@ const Login = () => {
 
       // Set userState:
       dispatch(userLogin(data.dataValues));
+      dispatch(setCart({cartId:data.cartId,productos:data.products}))
 
       // Store the user in localStorage to PERSIST:
       localStorage.setItem("user", JSON.stringify(data.dataValues));
+      localStorage.setItem("user", JSON.stringify({cartId:data.cartId,productos:data.products}));
 
       // Redirect to home page
       navigate("/");

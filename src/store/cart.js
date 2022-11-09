@@ -12,8 +12,8 @@ const initialState = {numCart:0,products:[]}
 
 //combinamos todas las acciones en un reducer
 
-const userReducer = createReducer(initialState, {
-    [setCart]:(state,action)=>{return state},
+const cartReducer = createReducer(initialState, {
+    [setCart]:(state,action)=>{return action.payload},
     [agrProd]:(state,action)=>{return state},
     [remProd]:(state,action)=>{return state},
     [vaciar]:(state,action)=>{return {...state,products:[]}},
@@ -22,4 +22,4 @@ const userReducer = createReducer(initialState, {
 
 });
 
-export default userReducer;
+export default cartReducer;

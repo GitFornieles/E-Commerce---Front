@@ -20,7 +20,7 @@ const CarritoItem = ({ producto }) => {
             <button type="button" class="btn btn-outline-secondary ">
               <i className="fa-solid fa-minus"></i>
             </button>
-            <span>0</span>
+            <span>{producto.qty}</span>
             <button type="button" className="btn btn-outline-secondary ">
               <i className="fa-solid fa-plus"></i>
             </button>
