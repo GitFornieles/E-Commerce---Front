@@ -48,7 +48,7 @@ const Navbar = () => {
                   </button>
                 </Link>
                 <Link to="/login">
-                  <button type="button" className="btn btn-secondary btn-sm">
+                  <button type="button" className="btn btn-primary btn-sm">
                     Login
                   </button>
                 </Link>
@@ -66,7 +66,7 @@ const Navbar = () => {
           </div>
           <Link to="/carrito">
             <button>
-              <ion-icon name="cart-sharp"></ion-icon>
+              <ion-icon name="cart"></ion-icon>
             </button>
           </Link>
         </div>
