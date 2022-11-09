@@ -26,7 +26,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login/admin" element={<AdminLogIn />} />
         <Route path="/admin/all_users" element={<UsersList />} />
-        <Route path="/admin/products" element={<AdminProducts />} />
+        <Route path="/admin/edit_product/:id" element={<AdminProducts />} />
       </Routes>
     </div>
   );

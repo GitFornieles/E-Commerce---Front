@@ -11,12 +11,8 @@ const ProductCard = () => {
   const counter = useSelector((state) => state.count.value);
   const [productos, setProductos] = useState([]);
   const producto = useLocation().pathname.split("/")[2];
-  console.log(producto);
   const productoIndividual = productos[producto - 1];
-
   const dispatch = useDispatch();
-
-  console.log(counter);
 
   const handleClickSumar = () => {
     dispatch(increase());
@@ -34,8 +30,6 @@ const ProductCard = () => {
       .then((res) => res.data)
       .then((productos) => setProductos(productos));
   }, []);
-
-  console.log(productos);
 
   return (
     <div>
