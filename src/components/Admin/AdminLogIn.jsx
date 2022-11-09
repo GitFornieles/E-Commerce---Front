@@ -24,6 +24,8 @@ const AdminLogIn = () => {
         }
       );
 
+      console.log(data);
+
       // Set userState:
       dispatch(userLogin(data.dataValues));
 
@@ -70,7 +72,11 @@ const AdminLogIn = () => {
             />
             <br />
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={handleSubmit}
+          >
             Iniciar Sesión
           </button>
         </form>
