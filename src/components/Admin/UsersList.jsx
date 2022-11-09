@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import UserItem from "./UserItem";
 
 const UsersList = () => {
   const user = useSelector((state) => state.user);
@@ -16,7 +17,7 @@ const UsersList = () => {
       .then((users) => {
         setUsers(users);
       });
-  }, []);
+  }, [users]);
 
   return (
     <div>
@@ -26,11 +27,16 @@ const UsersList = () => {
             <thead>
               <tr>
                 <th>USUARIOS</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Admin?</th>
               </tr>
             </thead>
 
             <tbody>
-              <tr></tr>
+              {users.map((user, i) => (
+                <UserItem user={user} key={i} i={i} />
+              ))}
             </tbody>
           </table>
         </section>
