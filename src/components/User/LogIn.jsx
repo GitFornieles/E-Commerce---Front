@@ -27,10 +27,10 @@ const Login = () => {
       );
 
       // Set userState:
-      dispatch(userLogin(data.dataValues));
+      dispatch(userLogin(data.user));
 
       // Store the user in localStorage to PERSIST:
-      localStorage.setItem("user", JSON.stringify(data.dataValues));
+      localStorage.setItem("user", JSON.stringify(data.user));
 
       // Redirect to home page
       navigate("/");
@@ -49,10 +49,6 @@ const Login = () => {
         <Link to="/">
           <button className="btn btn-secondary btn-sm">Home</button>
         </Link>
-
-        <button className="btn btn-secondary btn-sm" onClick={handleUser}>
-          USER
-        </button>
       </div>
 
       <h1>Login</h1>
