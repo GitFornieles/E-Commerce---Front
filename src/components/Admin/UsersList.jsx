@@ -30,6 +30,7 @@ const UsersList = () => {
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Admin?</th>
+                <th>Promover/Remover</th>
               </tr>
             </thead>
 

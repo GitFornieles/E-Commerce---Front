@@ -21,6 +21,7 @@ const UserItem = ({ user }) => {
       <td>{user.nickname}</td>
       <td>{user.name}</td>
       <td>{user.lastname}</td>
+      <td>{user.admin ? <h3>✓</h3> : <h3>✖️</h3>}</td>
       <td>
         {user.admin ? (
           <button onClick={removeAdmin}>Remover Admin</button>
