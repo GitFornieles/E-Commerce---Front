@@ -1,48 +1,36 @@
+import axios from "axios";
 import React from "react";
-import imagen from "../assets/imagen.jpg";
-import "../Styles/GrillaDeProductos.css"
-
-
-// este componente va a mostrar la grilla de productos
-// el style se obtiene de bootstrap y se customiza para la grilla, se va a crear una hoja de estilo para este componente. Se realiza responsive.
-// falta agregar los estados de Redux 
-// Se va a agragar funcionalidad de handleclick para los botones de + y - y agregar al carrito 
-// hacer axios para la ruta del back y luego hacer MAP para recorrer todos los productos
-
+import { useEffect } from "react";
+import "../Styles/GrillaDeProductos.css";
+import { useState } from "react";
+import ProductItem from "../commons/ProductItem";
 
 const GrillaDeProductos = () => {
+  //se crea estado local para llamar a la lista de productos y mostrarlos en la grilla
+  const [productos, setProductos] = useState([]);
+
+  //se utiliza useEffect para hacer el pedido axios a la ruta de productos
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/products")
+      .then((res) => res.data)
+      .then((productos) => setProductos(productos));
+  }, [productos]);
+
   return (
     <>
-      <div className="row" id="grilla">
-        <div className="col-3">
-        <div className="card" >
-          <img src={imagen} alt="ACA VA LA FOTO" />
-          <br />
-          <div className="card-body">
-            <h5 class="card-title">225$</h5>
-            <p className="card-text"> REPUESTO PARA DIFUSOR LIMA </p>
-            <div className="contador">
-              <button type="button" class="btn btn-primary">
-                <i class="fa-solid fa-minus"></i>
-              </button>
-              <span> 5 </span>
-              <button type="button" class="btn btn-primary">
-                <i class="fa-solid fa-plus"></i>
-              </button>
-            </div>
-            <br />
-            <button type="button" class="btn btn-secondary btn-sm btn-color">
-              <span class="glyphicon glyphicon-shopping-cart"></span>
-              <b> Agregar </b>
-              <i class="fa-solid fa-cart-shopping"></i>
-            </button>
-            </div>
-          </div>
-        </div>     
-
+      <div
+        style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+      >
+        {productos.map((product, i) => (
+          <ProductItem product={product} key={i} i={i} />
+        ))}
       </div>
     </>
+
   );
 };
 
 export default GrillaDeProductos;
+
+

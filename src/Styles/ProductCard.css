@@ -1,0 +1,37 @@
+body {
+  font-family: serif;
+}
+
+.leftAlign {
+  text-align: left;
+}
+
+button {
+  padding: 15px 32px;
+  text-align: center;
+  display: inline-block;
+  width: auto;
+  height: auto;
+}
+
+.marginbottom {
+  margin-bottom: 20px;
+}
+
+#cardindividual{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+#cardindividualbotones{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    
+}
+#alinearcard{
+  display: flex;
+  justify-content: center;
+}
