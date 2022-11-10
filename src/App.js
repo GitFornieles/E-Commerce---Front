@@ -10,6 +10,7 @@ import Home from "./components/Home";
 import Login from "./components/User/LogIn";
 import AdminLogIn from "./components/Admin/AdminLogIn";
 import UsersList from "./components/Admin/UsersList";
+import AdminProducts from "./components/Admin/AdminProducts";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login/admin" element={<AdminLogIn />} />
         <Route path="/admin/all_users" element={<UsersList />} />
+        <Route path="/admin/edit_product/:id" element={<AdminProducts />} />
       </Routes>
     </div>
   );
