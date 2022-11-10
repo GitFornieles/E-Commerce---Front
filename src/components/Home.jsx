@@ -33,7 +33,7 @@ const Home = () => {
             justifyContent: "flex-start",
           }}
         >
-          <div className="dropdown" style={{marginLeft:"40px"}}>
+          <div className="dropdown" style={{ marginLeft: "40px" }}>
             <button
               className="btn btn-secondary dropdown-toggle"
               type="button"
@@ -43,44 +43,43 @@ const Home = () => {
               Categorias
             </button>
             <ul className="dropdown-menu">
-            <Link to="categorie/Velas">
-              <li>
-                <a className="dropdown-item" href="#">
-                  Velas
-                </a>
-              </li>
+              <Link to="categorie/Velas">
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Velas
+                  </a>
+                </li>
               </Link>
               <Link to="categorie/Difusores">
-              <li>
-                <a className="dropdown-item" href="#">
-                Difusores
-                </a>
-              </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Difusores
+                  </a>
+                </li>
               </Link>
               <Link to="categorie/Aromatizadores">
-              <li>
-                <a className="dropdown-item" href="#">
-                Aromatizadores
-                </a>
-              </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Aromatizadores
+                  </a>
+                </li>
               </Link>
               <Link to="categorie/Escencias">
-              <li>
-                <a className="dropdown-item" href="#">
-                Escencias
-                </a>
-              </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Escencias
+                  </a>
+                </li>
               </Link>
             </ul>
           </div>
-          
         </div>
 
-      <div className="m-0 row justify-content-center">
-        <img src={Logo} style={imgStyles} alt="logo" />
-
+        <div className="m-0 row justify-content-center">
+          <img src={Logo} style={imgStyles} alt="logo" />
+        </div>
+        <GrillaDeProductos />
       </div>
-      <GrillaDeProductos />
     </div>
   );
 };
