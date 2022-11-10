@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../img/logo.jpg";
-import "../styles/Navbar.css";
+import "../Styles/Navbar.css";
 import GrillaDeProductos from "./GrillaDeProductos";
 
 const Home = () => {
