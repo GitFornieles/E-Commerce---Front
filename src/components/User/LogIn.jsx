@@ -27,10 +27,10 @@ const Login = () => {
       );
 
       // Set userState:
-      dispatch(userLogin(data.dataValues));
+      dispatch(userLogin(data.user));
 
       // Store the user in localStorage to PERSIST:
-      localStorage.setItem("user", JSON.stringify(data.dataValues));
+      localStorage.setItem("user", JSON.stringify(data.user));
 
       // Redirect to home page
       navigate("/");
