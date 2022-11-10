@@ -17,7 +17,7 @@ useEffect(() => {
  
 // hay que agregar la funcionalidad del boton "AGREGAR" ====> esto esta pendiente <====
 const handleClickAgregar = () => {
-  axios.post("http://localhost:8000/api/products/add", )
+  axios.post("http://localhost:8000/api/products/add")
 }
 
   return (
@@ -32,22 +32,22 @@ const handleClickAgregar = () => {
               <div className="card-body" id="cardposition">
                 <h5 className="card-title">{product.price} $</h5>
                 <Link to={`../grilla/${product.id}`} style={{textDecoration:"none"}} >
-                <p className="card-text" style={{fontFamily:"fantasy", fontSize:"20px"}}> {product.name} </p>
+                <p className="card-text" style={{fontSize:"20px"}}> {product.name} </p>
                 </Link>
                 
                 <br />
                   <span> STOCK {product.stock}</span>
                 <br />
                 <br />
+                <Link to={`../grilla/${product.id}`} style={{textDecoration:"none"}} >
                 <button
                   type="button"
-                  className="btn btn-secondary btn-sm btn-color" id="agregar"
-                  onClick={handleClickAgregar}
-                >
+                  className="btn btn-secondary btn-sm btn-color" id="agregar">
                   <span className="glyphicon glyphicon-shopping-cart" ></span>
                   <b> Agregar </b>
                   <i className="fa-solid fa-cart-shopping"></i>
                 </button>
+                </Link>
               </div>
             </div>
 ))}       

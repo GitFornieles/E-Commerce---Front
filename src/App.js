@@ -5,7 +5,7 @@ import ProductCard from "./commons/ProductCard";
 import Registro from "./components/User/Registro";
 import { Route, Routes } from "react-router";
 import GrillaDeProductos from "./components/GrillaDeProductos";
-
+import VistaCheckout from "./components/VistaCheckout";
 import Carrito from "./components/Carrito";
 
 import Home from "./components/Home";
@@ -29,6 +29,12 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login/admin" element={<AdminLogIn />} />
 
+
+
+
+
+
+        <Route path="/checkout" element={<VistaCheckout/>}/>
       </Routes>
 
     </div>

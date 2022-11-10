@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { userLogOut } from "../store/user";
-
+import {vaciar} from "../store/cart"
 const Navbar = () => {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
@@ -16,6 +16,7 @@ const Navbar = () => {
 
       // Setteo un user vacio:
       dispatch(userLogOut());
+      dispatch(vaciar({}))
 
       // Vuelvo a la pagina de inicio:
       navigate("/");
@@ -39,6 +40,11 @@ const Navbar = () => {
                 >
                   Log Out
                 </button>
+                <Link to="/">
+                  <button type="button" className="btn btn-secondary btn-sm">
+                    Home
+                  </button>
+                </Link>
               </div>
             ) : (
               <div className="col-md-4 col-xs-4">
@@ -65,7 +71,7 @@ const Navbar = () => {
             />
           </div>
           <Link to="/carrito">
-            <button>
+            <button className="btn btn-secondary btn-sm">
               <ion-icon name="cart-sharp"></ion-icon>
             </button>
           </Link>

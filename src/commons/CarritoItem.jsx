@@ -1,31 +1,31 @@
+import axios from "axios";
 import React from "react";
+import { useState, useEffect } from "react";
 import "../Styles/CarritoItem.css";
 
-const CarritoItem = ({ producto }) => {
-  console.log(producto);
+const CarritoItem = ({ producto,qty,id,handlePlus,handleMinus }) => {
   const imgStyles = {
     heigth: "50px",
   };
-
   return (
     <>
       <tr>
-        <td scope="row">
-          <img src={producto.mainImage} style={imgStyles} />
-        </td>
-        <td>{producto.categorie}</td>
+        <td scope="row">{id}</td>
+        <td>{producto.name}</td>
         <td>{producto.price}</td>
+        <td>{producto.stock}</td>
         <td id="boton">
           <div className="contador marginbottom">
-            <button type="button" class="btn btn-outline-secondary ">
-              <i className="fa-solid fa-minus"></i>
+            <button id={id} type="button" className="btn btn-outline-secondary" onClick={(e)=>handleMinus(e)}>
+              <i id={id} className="fa-solid fa-minus"></i>
             </button>
-            <span>{producto.qty}</span>
-            <button type="button" className="btn btn-outline-secondary ">
-              <i className="fa-solid fa-plus"></i>
+            <span>{qty}</span>
+            <button id={id} type="button" className="btn btn-outline-secondary" onClick={(e)=>handlePlus(e,producto.stock)}>
+              <i id={id} className="fa-solid fa-plus"></i>
             </button>
           </div>
         </td>
+        <td>{producto.price*qty}</td>
       </tr>
     </>
   );

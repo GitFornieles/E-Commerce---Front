@@ -4,38 +4,46 @@ import "../Styles/ProductCard.css";
 import { useLocation } from "react-router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { increase, decrease } from "../store/count";
 import { Link } from "react-router-dom";
 
 const ProductCard = () => {
-  const counter = useSelector((state) => state.count.value);
-  const [productos, setProductos] = useState([]);
-  const producto = useLocation().pathname.split("/")[2];
-  console.log(producto);
-  const productoIndividual = productos[producto - 1];
-
+  //counter es estado local
+  const user = useSelector((state) => state.user);
+  const cart = useSelector((state) => state.cart);
+  const [producto, setProducto] = useState([]);
+  const productoId = useLocation().pathname.split("/")[2];
   const dispatch = useDispatch();
+  let [counter, setCounter] = useState(0);
 
-  console.log(counter);
-
-  const handleClickSumar = () => {
-    dispatch(increase());
-  };
-
-  const handleClickRestar = () => {
-    dispatch(decrease());
-  };
-
-  console.log(productoIndividual);
-
-  useEffect(() => {
+  
+  useEffect(() => {    
     axios
-      .get(`http://localhost:8000/api/products/${producto}`)
+      .get(`http://localhost:8000/api/products/${productoId}`)
       .then((res) => res.data)
-      .then((productos) => setProductos(productos));
+      .then((producto) => setProducto(producto));
   }, []);
 
-  console.log(productos);
+  // TENER EN CUENTA QUE SETSTATE (EN ESTE CASO SETCOUNTER) ES ASINCRÓNICO. Y NO SE PUEDE SETEAR COUNTER A MANO
+  const handleClickSumar = (counter) => {
+    let newCounter=counter+1
+    return setCounter(newCounter);
+  };
+  const handleClickRestar = (counter) => {
+    if (counter === 0) return;
+    let newCounter=counter-1
+    return setCounter(newCounter);
+  };
+
+  const handleAdd = (productId, cart, counter) => {
+    // { cartId, productId, qty }
+    const qty = Number(counter);
+    const cartId = cart.cartId;
+    axios.post(`http://localhost:8000/api/cart/addProduct`, {
+      cartId,
+      productId,
+      qty,
+    });
+  };
 
   return (
     <div>
@@ -56,10 +64,10 @@ const ProductCard = () => {
         }}
       >
         <Link to="calificar">
-        <button className="btn btn-primary">
-          {" "}
-          {productos.rating} .<i className="fa-solid fa-ranking-star"></i>
-        </button>
+          <button className="btn btn-primary">
+            {" "}
+            {producto.rating} .<i className="fa-solid fa-ranking-star"></i>
+          </button>
         </Link>
       </div>
       {/* _________________ */}
@@ -69,17 +77,17 @@ const ProductCard = () => {
           <div className="row g-0">
             <div className="col-md-4">
               <img
-                src={productos.mainImage}
+                src={producto.mainImage}
                 className="img-fluid round-start"
               />
             </div>
             <div className="col-md-8" id="cardindividual">
               <div className="card-body">
-                <h5 className="card-title"> {productos.name} </h5>
+                <h5 className="card-title"> {producto.name} </h5>
                 <br />
-                <p className="card-text">{productos.description}</p>
+                <p className="card-text">{producto.description}</p>
                 <p className="card-text" style={{ fontSize: "25px" }}>
-                  {productos.price} $
+                  {producto.price} $
                 </p>
 
                 <div id="cardindividualbotones">
@@ -87,16 +95,16 @@ const ProductCard = () => {
                     type="button"
                     className="btn btn-primary"
                     style={{ marginRight: "20px" }}
-                    onClick={handleClickRestar}
+                    onClick={()=>handleClickRestar(counter)}
                   >
                     <i className="fa-solid fa-minus"></i>
                   </button>
-                  <span> {counter} </span>
+                  <span id="counter"> {counter} </span>
                   <button
                     type="button"
                     className="btn btn-primary"
                     style={{ marginLeft: "20px" }}
-                    onClick={handleClickSumar}
+                    onClick={()=>handleClickSumar(counter)}
                   >
                     <i className="fa-solid fa-plus"></i>
                   </button>
@@ -108,6 +116,7 @@ const ProductCard = () => {
                   <button
                     type="button"
                     className="btn btn-secondary btn-sm btn-color"
+                    onClick={() => handleAdd(productoId, cart, counter)}
                   >
                     <span className="glyphicon glyphicon-shopping-cart"></span>
                     <b> Agregar </b>
@@ -119,46 +128,43 @@ const ProductCard = () => {
           </div>
         </div>
       </div>
-
-      {/* _______________________ */}
-
-      <div style={{display:"flex", flexWrap:"wrap", justifyContent:"center"}}>
-        <div class="col-sm-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Juan Perez</h5>
-              <p class="card-text" >
-                Compre el producto la semana pasada, y realmente es muy bueno.
-                lo recomiendo 100%
-              </p>
-              <button className="btn btn-primary"> <i class="fa-solid fa-star" > </i> 5 </button>
-       
-            </div>
-          </div>
-        </div>
-      </div>
-      <div style={{display:"flex", flexWrap:"wrap", justifyContent:"center"}}>
-        <div class="col-sm-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Pepe Argento</h5>
-              <p class="card-text" >
-                realmente la atención y la calidad del producto es muy buena, siempre compro el mismo producto.
-              </p>
-              <button className="btn btn-primary"> <i class="fa-solid fa-star" > </i> 5 </button>
-       
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
     </div>
   );
 };
 
 export default ProductCard;
+
+{
+  /* <div style={{display:"flex", flexWrap:"wrap", justifyContent:"center"}}>
+<div class="col-sm-4">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Juan Perez</h5>
+      <p class="card-text" >
+        Compre el producto la semana pasada, y realmente es muy bueno.
+        lo recomiendo 100%
+      </p>
+      <button className="btn btn-primary"> <i class="fa-solid fa-star" > </i> 5 </button>
+
+    </div>
+  </div>
+</div>
+</div>
+<div style={{display:"flex", flexWrap:"wrap", justifyContent:"center"}}>
+<div class="col-sm-4">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Pepe Argento</h5>
+      <p class="card-text" >
+        realmente la atención y la calidad del producto es muy buena, siempre compro el mismo producto.
+      </p>
+      <button className="btn btn-primary"> <i class="fa-solid fa-star" > </i> 5 </button>
+
+    </div>
+  </div>
+</div>
+</div> */
+}
 
 {
   /* <div class="card mb-3">
