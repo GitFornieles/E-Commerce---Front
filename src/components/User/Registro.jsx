@@ -202,31 +202,16 @@ const Registro = () => {
             />
           </div>
           <div>
-            <label>Contraseña:</label>
-            {pass.length >= 8 ? (
-              <input
-                value={pass}
-                onChange={handleChangesetPass}
-                type="password"
-                className="form-control"
-                id="floatingPassword"
-                placeholder="Contraseña"
-              />
-            ) : (
-              <div>
-                <input
-                  value={pass}
-                  onChange={handleChangesetPass}
-                  type="password"
-                  className="form-control"
-                  id="floatingPassword"
-                  placeholder="Contraseña"
-                />
-                <p className="card-text text-danger">
-                  <small>{`Contraseña debe ser de por lo menos 8 caracteres`}</small>
-                </p>
-              </div>
-            )}
+            <label>Contraseña (mínimo 8 caracteres):</label>
+
+            <input
+              value={pass}
+              onChange={handleChangesetPass}
+              type="password"
+              className="form-control"
+              id="floatingPassword"
+              placeholder="Contraseña"
+            />
           </div>
           <button type="submit" className="btn btn-primary">
             Enviar

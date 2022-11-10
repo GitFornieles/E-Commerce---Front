@@ -23,6 +23,17 @@ const ProductCard = () => {
       .then((comentarios) => setComentarios(comentarios));
   }, []);
 
+  const dispatch = useDispatch();
+
+  const handleClickSumar = () => {
+    dispatch(increase());
+  };
+
+  const handleClickRestar = () => {
+    dispatch(decrease());
+  };
+
+
   useEffect(() => {
     axios
       .get(`http://localhost:8000/api/products/${producto}`)
@@ -31,7 +42,6 @@ const ProductCard = () => {
   }, []);
 
 const ratingProducto = ((comentarios.reduce((acc, el) => acc + el.rating, 0))/comentarios.length).toFixed(2)
-
 
   return (
     <div >

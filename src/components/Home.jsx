@@ -8,7 +8,7 @@ const Home = () => {
   const imgStyles = {
     heigth: "150px",
     width: "150px",
-    objectFit: "cover",
+
     objectPosition: " center",
   };
 
@@ -18,14 +18,8 @@ const Home = () => {
         <div className="corner-ribbon__inner">
           <div className="corner-ribbon__ribbon"></div>
         </div>
-        <div id="text" className="m-0 row justify-content-center">
-          <h5>SAHUMEROS ARTESANALES </h5>
-          <p> Sahumerios suaves y diferentes. Hechos artesanalmente</p>
-        </div>
-        <div className="m-0 row justify-content-center">
-          <img src={Logo} style={imgStyles} alt="logo" />
-        </div>
       </div>
+
       <div className="separator">
         <div className="separator__content"> </div>
 
@@ -81,7 +75,12 @@ const Home = () => {
           </div>
           
         </div>
+
+      <div className="m-0 row justify-content-center">
+        <img src={Logo} style={imgStyles} alt="logo" />
+
       </div>
+      <GrillaDeProductos />
     </div>
   );
 };

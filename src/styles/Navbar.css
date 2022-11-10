@@ -1,21 +1,17 @@
-#text {
-  font-family: serif;
+.Difusores {
+  background-color: #d5bdaf;
   text-align: center;
-  font-size: 60%;
+  color: white;
+  display: block;
+  font-family: "Times New Roman", Times, serif;
+  text-shadow: black 0.1em 0.1em 0.2em;
 }
 
-h5 {
-  font-family: serif;
-  text-align: center;
-  font-size: 200%;
+#nav {
+  box-shadow: 6px 11px 13px 0px rgba(202, 255, 231, 0.2);
+  -webkit-box-shadow: 6px 11px 13px 0px rgba(202, 255, 231, 0.2);
+  -moz-box-shadow: 6px 11px 13px 0px rgba(202, 255, 231, 0.2);
 }
-p {
-  font-family: serif;
-  text-align: center;
-  font-size: 100%;
-  font-style: italic;
-}
-
 .corner-ribbon {
   position: relative;
 }
@@ -52,36 +48,4 @@ p {
 
   /* Centerize the text content */
   text-align: center;
-}
-
-.separator {
-  /* Content is centered horizontally */
-  align-items: center;
-  display: flex;
-
-  /* Used to set the position of text */
-  position: relative;
-}
-
-.separator__content {
-  /* We won't see the separator line */
-  background: #fff;
-
-  /* Displayed at the center of separator */
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-
-  /* Spacing */
-  padding: 0 0.25rem;
-
-  /* Demo */
-  width: 60%;
-}
-
-.separator__separator {
-  border-bottom: 1px solid #d1d5db;
-  height: 1px;
-  width: 100%;
 }
