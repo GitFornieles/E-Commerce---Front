@@ -33,18 +33,36 @@ const MenuDesplegable = () => {
       >
         {user.nickname}
       </button>
-      <ul class="dropdown-menu">
-        <li>
-          <a className="dropdown-item" href="#">
-            Lista de usuarios
-          </a>
-        </li>
-        <li>
-          <a className="dropdown-iem" onClick={handleLogOut}>
-            Cerrar sesión
-          </a>
-        </li>
-      </ul>
+
+      <div>
+        {user.admin ? (
+          <ul class="dropdown-menu">
+            <li>
+              <a className="dropdown-item" href="#">
+                Lista de usuarios
+              </a>
+            </li>
+            <li>
+              <a className="dropdown-item" onClick={handleLogOut}>
+                Cerrar sesión
+              </a>
+            </li>
+          </ul>
+        ) : (
+          <ul class="dropdown-menu">
+            <li>
+              <a className="dropdown-item" href="#">
+                Historial de compras
+              </a>
+            </li>
+            <li>
+              <a className="dropdown-item" onClick={handleLogOut}>
+                Cerrar sesión
+              </a>
+            </li>
+          </ul>
+        )}
+      </div>
     </div>
   );
 };

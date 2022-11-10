@@ -58,7 +58,7 @@ const Navbar = () => {
             className="d-inline-block align-text-top"
           />
 
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <div className="collapse navbar-collapse p-2" id="navbarTogglerDemo02">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <>
                 {user.name ? (
