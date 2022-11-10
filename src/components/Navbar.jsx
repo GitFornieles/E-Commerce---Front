@@ -35,12 +35,14 @@ const Navbar = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <img
-            src={A}
-            alt="Logo"
-            style={logonav}
-            className="d-inline-block align-text-top"
-          />
+          
+            <img
+              src={A}
+              alt="Logo"
+              style={logonav}
+              className="d-inline-block align-text-top"
+            />
+          
 
           <div
             className="collapse navbar-collapse p-2"

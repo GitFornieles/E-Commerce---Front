@@ -46,6 +46,14 @@ const MenuDesplegable = () => {
               </a>
             </li>
             <li>
+              <a
+                className="dropdown-item"
+                href="http://localhost:3000/admin/add_product"
+              >
+                Agregar productos
+              </a>
+            </li>
+            <li>
               <a className="dropdown-item" onClick={handleLogOut}>
                 Cerrar sesión
               </a>

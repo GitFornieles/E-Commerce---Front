@@ -21,6 +21,15 @@ const UsersList = () => {
 
   return (
     <div>
+      <div>
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <a href="http://localhost:3000/">Home</a>
+            </li>
+          </ol>
+        </nav>
+      </div>
       {user.admin ? (
         <section className="pt-4">
           <table className="table is-hoverable is-fullwidth">
