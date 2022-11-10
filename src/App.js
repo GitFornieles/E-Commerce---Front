@@ -22,7 +22,6 @@ function App() {
   return (
     <div>
       <Navbar />
-      <Home/>
       <Routes>
         <Route path="/register" element={<Registro />} />
         <Route path="/grilla/:id" element={<ProductCard />} />

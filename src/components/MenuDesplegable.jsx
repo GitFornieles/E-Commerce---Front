@@ -38,7 +38,7 @@ const MenuDesplegable = () => {
         {user.admin ? (
           <ul class="dropdown-menu">
             <li>
-              <a className="dropdown-item" href="#">
+              <a className="dropdown-item" href="http://localhost:3000/admin/all_users">
                 Lista de usuarios
               </a>
             </li>

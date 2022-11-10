@@ -9,22 +9,6 @@ import MenuDesplegable from "./MenuDesplegable";
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const handleLogOut = async () => {
-    try {
-      await axios.post("http://localhost:8000/api/users/logout");
-
-      // Setteo un user vacio:
-      dispatch(userLogOut());
-
-      // Vuelvo a la pagina de inicio:
-      navigate("/");
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   const logonav = {
     width: "4%",
@@ -58,7 +42,10 @@ const Navbar = () => {
             className="d-inline-block align-text-top"
           />
 
-          <div className="collapse navbar-collapse p-2" id="navbarTogglerDemo02">
+          <div
+            className="collapse navbar-collapse p-2"
+            id="navbarTogglerDemo02"
+          >
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <>
                 {user.name ? (
