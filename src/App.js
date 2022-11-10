@@ -11,6 +11,8 @@ import Login from "./components/User/LogIn";
 import AdminLogIn from "./components/Admin/AdminLogIn";
 import UsersList from "./components/Admin/UsersList";
 import AddProducts from "./components/Admin/AddProducts";
+import AdminProducts from "./components/Admin/AdminProducts";
+
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
         <Route path="/login/admin" element={<AdminLogIn />} />
         <Route path="/admin/all_users" element={<UsersList />} />
         <Route path="/admin/add_product" element={<AddProducts />} />
+        <Route path="/admin/edit_product/:id" element={<AdminProducts />} />
       </Routes>
     </div>
   );
