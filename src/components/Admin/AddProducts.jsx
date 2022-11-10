@@ -19,7 +19,7 @@ const AddProducts = () => {
   // Funcionalidad del boton AGREGAR PRODUCTO:
   const handleAdd = () => {
     axios
-      .put(`http://localhost:8000/api/products/add`, {
+      .post(`http://localhost:8000/api/products/add`, {
         name: title.value,
         description: description.value,
         price: Number(price.value),
