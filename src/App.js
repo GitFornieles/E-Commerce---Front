@@ -10,6 +10,7 @@ import Home from "./components/Home";
 import Login from "./components/User/LogIn";
 import AdminLogIn from "./components/Admin/AdminLogIn";
 import UsersList from "./components/Admin/UsersList";
+import HistorialDeCompras from "./components/HistorialDeCompras";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login/admin" element={<AdminLogIn />} />
         <Route path="/admin/all_users" element={<UsersList />} />
+        <Route path="/historial_de_compras" element={<HistorialDeCompras />} />
       </Routes>
     </div>
   );
