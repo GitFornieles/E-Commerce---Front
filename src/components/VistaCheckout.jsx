@@ -1,10 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
-import { vaciar } from "../store/cart";
+import { useState } from "react";
 import { setCart } from "../store/cart";
 
 const VistaCheckout = () => {
@@ -12,14 +9,14 @@ const VistaCheckout = () => {
   const cart = useSelector((state) => state.cart);
   const [medio, setMedio] = useState("");
   const dispatch = useDispatch();
-  const [pago,setPago]=useState({})
+  const [pago, setPago] = useState({});
 
   const handlePayment = (e) => {
     setMedio(e.target.id);
   };
 
-  const confirm = (e)=>{
-    e.preventDefault()
+  const confirm = (e) => {
+    e.preventDefault();
     const payment = {
       cartId: cart.cartId,
       total: cart.total,
@@ -29,10 +26,10 @@ const VistaCheckout = () => {
       .post("http://localhost:8000/api/payment/", payment)
       .then((response) => {
         let newCart = { cartId: response.data.cartId, productos: [], total: 0 };
-        dispatch(setCart(newCart))
-        setPago(response.payment)
+        dispatch(setCart(newCart));
+        setPago(response.payment);
       });
-  }
+  };
   return (
     <>
       <h1>CheckOut</h1>
@@ -58,35 +55,41 @@ const VistaCheckout = () => {
         </div>
       </div>
       {medio ? (
-        medio === "tarjeta" ? (<>
-          <h4>FORMULARIO TARJETA</h4>
-          <form action="" onSubmit={e=>confirm(e)}>
-            <label htmlFor="">Número de Tarjeta</label>
-            <input type="text" />
-            <label htmlFor="">CVV</label>
-            <input type="text" />
-            <label htmlFor="">Exp Date</label>
-            <input type="date" />
-            <button type="submit">CONFIRMAR</button>
-          </form>
-        </>) : (<>
-          <h4>FORMULARIO MERCADOPAGO</h4>
-          <form action="" onSubmit={e=>confirm(e)}>
-            <label htmlFor="">ALIAS/email</label>
-            <input type="text" />
-            <label htmlFor="">Password</label>
-            <input type="Password" />
-            <button type="submit">CONFIRMAR</button>
-          </form>
+        medio === "tarjeta" ? (
+          <>
+            <h4>FORMULARIO TARJETA</h4>
+            <form action="" onSubmit={(e) => confirm(e)}>
+              <label htmlFor="">Número de Tarjeta</label>
+              <input type="text" />
+              <label htmlFor="">CVV</label>
+              <input type="text" />
+              <label htmlFor="">Exp Date</label>
+              <input type="date" />
+              <button type="submit">CONFIRMAR</button>
+            </form>
+          </>
+        ) : (
+          <>
+            <h4>FORMULARIO MERCADOPAGO</h4>
+            <form action="" onSubmit={(e) => confirm(e)}>
+              <label htmlFor="">ALIAS/email</label>
+              <input type="text" />
+              <label htmlFor="">Password</label>
+              <input type="Password" />
+              <button type="submit">CONFIRMAR</button>
+            </form>
           </>
         )
       ) : (
         <h4>CONFIRMAR PAGO</h4>
       )}
-      {!pago ? <div id="confirmacion">
-        <h4>PAGO CONFIRMADO</h4>
-      </div> : ""}
-      
+      {!pago ? (
+        <div id="confirmacion">
+          <h4>PAGO CONFIRMADO</h4>
+        </div>
+      ) : (
+        ""
+      )}
     </>
   );
 };

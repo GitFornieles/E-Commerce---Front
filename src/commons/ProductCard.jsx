@@ -6,11 +6,9 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-
 const ProductCard = () => {
- 
   const [comentarios, setComentarios] = useState([]);
-  const user = useSelector((state) => state.user)
+  const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
   const [producto, setProducto] = useState([]);
   const productoId = useLocation().pathname.split("/")[2];
@@ -20,27 +18,27 @@ const ProductCard = () => {
     axios
       .get(`http://localhost:8000/api/reviews/comentarios/${productoId}`)
       .then((res) => res.data)
-      .then((comentarios) => setComentarios(comentarios));
-
-      axios
-        .get(`http://localhost:8000/api/products/${productoId}`)
-        .then((res) => res.data)
-        .then((producto) => setProducto(producto));
-
+      .then((comentarios) => setComentarios(comentarios))
+      .then(() => {
+        axios
+          .get(`http://localhost:8000/api/products/${productoId}`)
+          .then((res) => res.data)
+          .then((producto) => setProducto(producto));
+      });
   }, []);
-  
- 
 
-const ratingProducto = ((comentarios.reduce((acc, el) => acc + el.rating, 0))/comentarios.length).toFixed(2)
+  const ratingProducto = (
+    comentarios.reduce((acc, el) => acc + el.rating, 0) / comentarios.length
+  ).toFixed(2);
   // TENER EN CUENTA QUE SETSTATE (EN ESTE CASO SETCOUNTER) ES ASINCRÓNICO. Y NO SE PUEDE SETEAR COUNTER A MANO
 
   const handleClickSumar = (counter) => {
-    let newCounter=counter+1
+    let newCounter = counter + 1;
     return setCounter(newCounter);
   };
   const handleClickRestar = (counter) => {
     if (counter === 0) return;
-    let newCounter=counter-1
+    let newCounter = counter - 1;
     return setCounter(newCounter);
   };
 
@@ -56,7 +54,7 @@ const ratingProducto = ((comentarios.reduce((acc, el) => acc + el.rating, 0))/co
   };
 
   return (
-    <div >
+    <div>
       <div>
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb">
@@ -73,30 +71,40 @@ const ratingProducto = ((comentarios.reduce((acc, el) => acc + el.rating, 0))/co
           marginRight: "15%",
         }}
       >
-
-        {user.id ? (<Link to="calificar">
-          <button className="btn btn-primary">
-          {(ratingProducto === "NaN") ? "Producto Sin calificar" : ratingProducto}
-            <i className="fa-solid fa-ranking-star" style={{marginLeft:"2%"}}></i>
-          </button>
-        </Link>) : 
-          (<span >
-          {(ratingProducto === "NaN") ? "Producto Sin calificar" : ratingProducto}
-            <i className="fa-solid fa-ranking-star" style={{marginLeft:"2%"}}></i>
-          </span>)
-        }   
-
+        {user.id ? (
+          <Link to="calificar">
+            <button className="btn btn-primary">
+              {ratingProducto === "NaN"
+                ? "Producto Sin calificar"
+                : ratingProducto}
+              <i
+                className="fa-solid fa-ranking-star"
+                style={{ marginLeft: "2%" }}
+              ></i>
+            </button>
+          </Link>
+        ) : (
+          <span>
+            {ratingProducto === "NaN"
+              ? "Producto Sin calificar"
+              : ratingProducto}
+            <i
+              className="fa-solid fa-ranking-star"
+              style={{ marginLeft: "2%" }}
+            ></i>
+          </span>
+        )}
       </div>
       {/* _________________ */}
 
       <div id="alinearcard">
-        <div className="card mb-3" style={{ width: "70%", backgroundColor:"faedcd"}}>
+        <div
+          className="card mb-3"
+          style={{ width: "70%", backgroundColor: "faedcd" }}
+        >
           <div className="row g-0">
             <div className="col-md-4">
-              <img
-                src={producto.mainImage}
-                className="img-fluid round-start"
-              />
+              <img src={producto.mainImage} className="img-fluid round-start" />
             </div>
             <div className="col-md-8" id="cardindividual">
               <div className="card-body">
@@ -112,7 +120,7 @@ const ratingProducto = ((comentarios.reduce((acc, el) => acc + el.rating, 0))/co
                     type="button"
                     className="btn btn-primary"
                     style={{ marginRight: "20px" }}
-                    onClick={()=>handleClickRestar(counter)}
+                    onClick={() => handleClickRestar(counter)}
                   >
                     <i className="fa-solid fa-minus"></i>
                   </button>
@@ -121,7 +129,7 @@ const ratingProducto = ((comentarios.reduce((acc, el) => acc + el.rating, 0))/co
                     type="button"
                     className="btn btn-primary"
                     style={{ marginLeft: "20px" }}
-                    onClick={()=>handleClickSumar(counter)}
+                    onClick={() => handleClickSumar(counter)}
                   >
                     <i className="fa-solid fa-plus"></i>
                   </button>
@@ -148,9 +156,19 @@ const ratingProducto = ((comentarios.reduce((acc, el) => acc + el.rating, 0))/co
 
       {/* _______________________ */}
 
-<div style={{display:"flex", justifyContent:"center", marginBottom:"3%", marginTop:"3%"}}> <h3 >RESEÑAS DEL PRODUCTO </h3> </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "3%",
+          marginTop: "3%",
+        }}
+      >
+        {" "}
+        <h3>RESEÑAS DEL PRODUCTO </h3>{" "}
+      </div>
 
-      <div style={{marginLeft:"20%", marginRight:"20%"}}>
+      <div style={{ marginLeft: "20%", marginRight: "20%" }}>
         <div
           style={{
             display: "flex",
@@ -160,7 +178,7 @@ const ratingProducto = ((comentarios.reduce((acc, el) => acc + el.rating, 0))/co
         >
           {comentarios.map((review) => (
             <div className="col-sm-4">
-              <div className="card" style={{backgroundColor:"aliceBlue"}}>
+              <div className="card" style={{ backgroundColor: "aliceBlue" }}>
                 <div className="card-body">
                   <p className="card-text">{review.review}</p>
                   <button className="btn btn-primary">

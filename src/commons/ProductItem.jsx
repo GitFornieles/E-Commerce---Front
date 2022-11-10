@@ -65,16 +65,17 @@ const ProductItem = ({ product }) => {
               </div>
             </div>
           ) : (
-            <button
-              type="button"
-              className="btn btn-secondary btn-sm btn-color"
-              id="agregar"
-              onClick={handleClickAgregar}
-            >
-              <span className="glyphicon glyphicon-shopping-cart"></span>
-              <b> Agregar </b>
-              <i className="fa-solid fa-cart-shopping"></i>
-            </button>
+            <Link to={`../grilla/${product.id}`}>
+              <button
+                type="button"
+                className="btn btn-secondary btn-sm btn-color"
+                id="agregar"
+              >
+                <span className="glyphicon glyphicon-shopping-cart"></span>
+                <b> Agregar </b>
+                <i className="fa-solid fa-cart-shopping"></i>
+              </button>
+            </Link>
           )}
         </div>
       </div>

@@ -2,19 +2,21 @@ import axios from "axios";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-
 import { userLogOut } from "../store/user";
+import { vaciar } from "../store/cart";
 
 const MenuDesplegable = () => {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const handleLogOut = async () => {
     try {
       await axios.post("http://localhost:8000/api/users/logout");
 
       // Setteo un user vacio:
       dispatch(userLogOut());
+      dispatch(vaciar({}));
 
       // Vuelvo a la pagina de inicio:
       navigate("/");
