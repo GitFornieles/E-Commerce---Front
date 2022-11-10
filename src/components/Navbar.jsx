@@ -78,6 +78,47 @@ const Navbar = () => {
               </>
             </ul>
 
+            <div className="dropdown" style={{ marginRight: "600px" }}>
+              <button
+                className="btn btn-secondary dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Categorias
+              </button>
+              <ul className="dropdown-menu">
+                <Link to="categorie/Velas">
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Velas
+                    </a>
+                  </li>
+                </Link>
+                <Link to="categorie/Difusores">
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Difusores
+                    </a>
+                  </li>
+                </Link>
+                <Link to="categorie/Aromatizadores">
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Aromatizadores
+                    </a>
+                  </li>
+                </Link>
+                <Link to="categorie/Escencias">
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Escencias
+                    </a>
+                  </li>
+                </Link>
+              </ul>
+            </div>
+
             <form className="d-flex" role="search">
               <input
                 className="form-control me-2"

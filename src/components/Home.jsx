@@ -33,46 +33,7 @@ const Home = () => {
             justifyContent: "flex-start",
           }}
         >
-          <div className="dropdown" style={{ marginLeft: "40px" }}>
-            <button
-              className="btn btn-secondary dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Categorias
-            </button>
-            <ul className="dropdown-menu">
-              <Link to="categorie/Velas">
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Velas
-                  </a>
-                </li>
-              </Link>
-              <Link to="categorie/Difusores">
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Difusores
-                  </a>
-                </li>
-              </Link>
-              <Link to="categorie/Aromatizadores">
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Aromatizadores
-                  </a>
-                </li>
-              </Link>
-              <Link to="categorie/Escencias">
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Escencias
-                  </a>
-                </li>
-              </Link>
-            </ul>
-          </div>
+          
         </div>
 
         <div className="m-0 row justify-content-center">
