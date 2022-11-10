@@ -1,25 +1,50 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
-
 //Definimos las acciones que puede tener este estado
-export const setCart=createAction("SETCART")
-export const agrProd=createAction("AGRPROD")
-export const remProd=createAction("REMPROD")
-export const vaciar=createAction("VACIAR")
-export const pagar=createAction("PAGAR")
+export const setCart = createAction("SETCART");
+export const addProd = createAction("ADDPROD");
+export const remProd = createAction("REMPROD");
+export const vaciar = createAction("VACIAR");
 
-const initialState = {numCart:0,products:[]}
+const initialState = { cartId: 0, productos: [],total:0 };
 
 //combinamos todas las acciones en un reducer
 
-const userReducer = createReducer(initialState, {
-    [setCart]:(state,action)=>{return state},
-    [agrProd]:(state,action)=>{return state},
-    [remProd]:(state,action)=>{return state},
-    [vaciar]:(state,action)=>{return {...state,products:[]}},
-    [pagar]:(state,action)=>{return state}
-    
-
+const cartReducer = createReducer(initialState, {
+  [setCart]: (state, action) => {
+    let total=0
+    if(state.productos){
+        total=state.productos.reduce((acumulador,elemento)=>{
+            acumulador=acumulador+elemento.qty*elemento.purchasedPrice
+            return acumulador
+        },0)
+    }
+    return {...action.payload,total:total};
+  },
+  [addProd]: (state, action) => {
+    let total
+    if(state.productos){
+        total=state.productos.reduce((acumulador,elemento)=>{
+            acumulador=acumulador+elemento.qty*elemento.purchasedPrice
+            return acumulador
+        },0)
+    }
+    return {...action.payload,total:total}
+  },
+  [remProd]: (state, action) => {
+    let total
+    if(state.productos){
+        total=state.productos.reduce((acumulador,elemento)=>{
+            acumulador=acumulador+elemento.qty*elemento.purchasedPrice
+            return acumulador
+        },0)
+    }
+    return {...action.payload,total:total}
+  },
+  [vaciar]: (state, action) => {
+    localStorage.removeItem("cart");
+    return action.payload;
+  },
 });
 
-export default userReducer;
+export default cartReducer;

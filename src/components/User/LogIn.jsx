@@ -5,6 +5,8 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../../store/user";
 import { Link } from "react-router-dom";
+import { setCart } from "../../store/cart";
+import { useState } from "react";
 
 const Login = () => {
   const userName = useInput("userName");
@@ -12,7 +14,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
-
+  const [error,setError]=useState("")
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -28,14 +30,16 @@ const Login = () => {
 
       // Set userState:
       dispatch(userLogin(data.user));
+      dispatch(setCart({cartId:data.cartId,productos:data.products}))
 
       // Store the user in localStorage to PERSIST:
       localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("cart", JSON.stringify({cartId:data.cartId,productos:data.products}));
 
       // Redirect to home page
       navigate("/");
     } catch (err) {
-      console.log(err);
+      setError(err.response.data);
     }
   };
 
@@ -80,6 +84,8 @@ const Login = () => {
             Iniciar Sesión
           </button>
         </form>
+        <br />
+        {error? <h3>{error}</h3> : ""}
         <br />
         <div>
           <Link to="/login/admin">

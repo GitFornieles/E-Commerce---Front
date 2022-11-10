@@ -1,19 +1,35 @@
 import React from "react";
 import "../Styles/Navbar.css";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import { userLogOut } from "../store/user";
 import A from "../img/A.jpg";
 import MenuDesplegable from "./MenuDesplegable";
 
+import {vaciar} from "../store/cart"
 const Navbar = () => {
   const user = useSelector((state) => state.user);
 
   const logonav = {
     width: "4%",
     height: "4%",
-    objectPosition: " center",
+    objectPosition: " center"
+  }
+
+  const handleLogOut = async () => {
+    try {
+      await axios.post("http://localhost:8000/api/users/logout");
+
+      // Setteo un user vacio:
+      dispatch(userLogOut());
+      dispatch(vaciar({}))
+
+      // Vuelvo a la pagina de inicio:
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

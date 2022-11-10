@@ -3,8 +3,6 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
 const Registro = () => {
-  const [users, setUsers] = useState([]);
-
   const [dni, setDni] = useState([]);
   const [nickName, setNickName] = useState("");
   const [email, setEmail] = useState("");
@@ -72,10 +70,6 @@ const Registro = () => {
         cellphone: telefono,
       })
       .then((res) => res.data)
-      .then((user) => {
-        console.log(user);
-        setUsers(user);
-      })
       .then(() => navigate("/login"));
   };
   return (
@@ -98,6 +92,7 @@ const Registro = () => {
               className="form-control"
               id="floatingName"
               placeholder="Name"
+              required
             />
           </div>
           <div>
@@ -109,6 +104,7 @@ const Registro = () => {
               className="form-control"
               id="floatingLastName"
               placeholder="Apellido"
+              required
             />
           </div>
           <div>
@@ -120,6 +116,7 @@ const Registro = () => {
               className="form-control"
               id="floatingnickName"
               placeholder="Apodo"
+              required
             />
           </div>
           <div>
@@ -131,6 +128,7 @@ const Registro = () => {
               className="form-control"
               id="floatingDni"
               placeholder="Dni"
+              required
             />
           </div>
 
@@ -143,6 +141,7 @@ const Registro = () => {
               className="form-control"
               id="floatingEmail"
               placeholder="Email"
+              required
             />
           </div>
 
@@ -155,6 +154,7 @@ const Registro = () => {
               className="form-control"
               id="floatingAge"
               placeholder="Edad"
+              required
             />
           </div>
           <div>
@@ -166,6 +166,7 @@ const Registro = () => {
               className="form-control"
               id="floatingDireccion"
               placeholder="Dirección"
+              required
             />
           </div>
           <div>
@@ -177,6 +178,7 @@ const Registro = () => {
               className="form-control"
               id="floatingCiudad"
               placeholder="Ciudad"
+              required
             />
           </div>
           <div>
@@ -188,6 +190,7 @@ const Registro = () => {
               className="form-control"
               id="floatingPostal"
               placeholder="Código Postal"
+              required
             />
           </div>
           <div>
@@ -199,6 +202,7 @@ const Registro = () => {
               className="form-control"
               id="floatingTelefono"
               placeholder="Teléfono"
+              required
             />
           </div>
           <div>
@@ -211,6 +215,7 @@ const Registro = () => {
               className="form-control"
               id="floatingPassword"
               placeholder="Contraseña"
+              required
             />
           </div>
           <button type="submit" className="btn btn-primary">

@@ -1,77 +1,121 @@
+import axios from "axios";
 import React from "react";
-import CarritoItem from "./CarritoItem";
-
+import { useDispatch, useSelector } from "react-redux";
+import CarritoItem from "../commons/CarritoItem";
+import { useEffect } from "react";
+import { setCart } from "../store/cart";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import { addProd,remProd } from "../store/cart";
 const Carrito = () => {
-  const vela = [
-    {
-      name: "Aromatizador de Ambiente Coco y Lima",
-      mainImage:
-        "https://www.vzlivesimply.com/wp/wp-content/uploads/2018/12/DSC_6524-Editar.jpg",
-      categorie: "Aromatizantes",
-      description:
-        "Aromatizante de ambiente en spray que por su aroma dulce e intenso, formado por la combinación de coco y lima, posibilita crear un ambiente propicio para reducir los niveles de stress.",
-      cost: 500,
-      price: 1900,
-      stock: 4,
-      rating: 3,
-    },
-    {
-      name: "Combo Full Verbena",
-      mainImage:
-        "https://www.vzlivesimply.com/wp/wp-content/uploads/2020/06/COMBO-VERBENA-21-scaled.jpg",
-      categorie: "Aromatizantes",
-      description:
-        "El Combo perfecto para aromatizar los ambientes con la deliciosa fragancia de la verbena. Su aroma cítrico perfuma y brinda frescura.",
-      cost: 3000,
-      price: 6900,
-      stock: 5,
-      rating: 3,
-    },
-    {
-      name: "Aromatizador de Ambiente This Is Love",
-      mainImage:
-        "https://www.vzlivesimply.com/wp/wp-content/uploads/2018/12/DSC_6667-Editar.jpg",
-      categorie: "Aromatizantes",
-      description:
-        "Su fragancia estimulante y refrescante induce a un estado de ánimo reconfortante y vivificante. Es el complemento ideal para intensificar la fragancia del difusor This is Love.",
-      cost: 800,
-      price: 2750,
-      stock: 3,
-      rating: 4,
-    },
-    {
-      name: "Aromatizador de Ambiente Amate",
-      mainImage:
-        "https://www.vzlivesimply.com/wp/wp-content/uploads/2018/12/DSC_8993-Editar-2.jpg",
-      categorie: "Aromatizantes",
-      description:
-        "Aromatiza el ambiente con una fragancia herbal y cítrica, su perfume fresco e intenso. Ideal para vaporizar en los ambientes y conectarnos con la naturaleza para sentirnos en armonía.",
-      cost: 900,
-      price: 2540,
-      stock: 10,
-      rating: 2,
-    },
-  ];
+  let cart = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  //console.log(vela);
+  useEffect(() => {
+    axios
+      .post(`http://localhost:8000/api/cart/currentCart`, {
+        ownerId: user.id,
+      })
+      .then((result) => {
+        return dispatch(setCart(result.data));
+      });
+  }, []);
+  cart = useSelector((state) => state.cart);
+
+  const handlePlus= (e,disponibilidad)=>{
+    const productId=e.target.id
+    // El código de abajo es para romper la relación entre las variables que trabajo y el estado cart; de lo contrario siempre devolvía que es "read-only"
+    let newCart=JSON.parse(JSON.stringify(cart))
+    let newProductos=[]
+    newCart.productos.forEach((producto,index)=>newProductos[index]=producto)
+    const currentProd=newProductos.findIndex(element=>element.productId==productId)
+    if(newProductos[currentProd].qty>=disponibilidad) return
+    newProductos[currentProd].qty++
+    newCart={cartId:cart.cartId,productos:newProductos}
+    return dispatch(addProd(newCart))
+  }
+  const handleMinus= (e)=>{
+    const productId=e.target.id
+    // El código de abajo es para romper la relación entre las variables que trabajo y el estado cart; de lo contrario siempre devolvía que es "read-only"
+    let newCart=JSON.parse(JSON.stringify(cart))
+    let newProductos=[]
+    newCart.productos.forEach((producto,index)=>newProductos[index]=producto)
+    const currentProd=newProductos.findIndex(element=>element.productId==productId)
+    if(newProductos[currentProd].qty<=0)return
+    newProductos[currentProd].qty--
+    newCart={cartId:cart.cartId,productos:newProductos}
+    return dispatch(remProd(newCart))
+  }
+
+  const  handleSave = ()=>{
+    const ownerId=user.userId
+    const productos=cart.productos
+    const cartId=cart.cartId
+
+    let cambioCantidades=productos.reduce((acum,elemento)=>{
+      acum.push({id:elemento.id,qty:elemento.qty})
+      return acum
+    },[])
+    return axios.put("http://localhost:8000/api/cart/saveCart",cambioCantidades)
+  }
+
+  const handlePurchase = ()=>{
+    handleSave()
+    navigate("/checkout")
+  }
+
   return (
     <div className="container-fluid">
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col"></th>
-            <th scope="col">Producto</th>
-            <th scope="col">Precio</th>
-            <th scope="col">Cantidad</th>
-            <th scope="col">SUBTOTAL</th>
-          </tr>
-        </thead>
-        <tbody>
-          {vela.map((producto) => {
-            return <CarritoItem producto={producto} key={producto.id} />;
-          })}
-        </tbody>
-      </table>
+      {!user.id ? (
+        <Link to="/login">
+        <h3>LOGUEATE</h3></Link>
+      ) : (
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">Num</th>
+              <th scope="col">Producto</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Disponibilidad</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">SUBTOTAL</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cart.productos.length
+              ? cart.productos.map((elemento) => {
+                  return (
+                    <CarritoItem
+                      key={elemento.id}
+                      producto={elemento.product}
+                      qty={elemento.qty}
+                      id={elemento.product.id}
+                      handlePlus={handlePlus}
+                      handleMinus={handleMinus}
+                    />
+                  );
+                })
+              : ""}
+          </tbody>
+        </table>
+      )}
+      <div id="valorTotal">
+        <h3>Total de la Compra:</h3>
+        <h4>{cart.total}</h4>
+      </div>
+      <div id="botonera">
+        <button className="btn btn-secondary btn-sm" onClick={handlePurchase}>
+                COMPRAR
+        </button>
+        <button className="btn btn-secondary btn-sm">
+                BORRAR
+        </button>
+        <button className="btn btn-secondary btn-sm" onClick={handleSave}>
+                GUARDAR
+        </button>
+      </div>
     </div>
   );
 };
