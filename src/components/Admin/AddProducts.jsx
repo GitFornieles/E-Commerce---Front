@@ -3,6 +3,7 @@ import axios from "axios";
 import "../../Styles/ProductCard.css";
 import { useNavigate } from "react-router";
 import { useInput } from "../../hooks/useInput";
+import { Link } from "react-router-dom";
 
 const AddProducts = () => {
   const navigate = useNavigate();
@@ -38,7 +39,9 @@ const AddProducts = () => {
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
-              <a href="http://localhost:3000/">Home</a>
+              <Link to="/">
+                <p>Home</p>
+              </Link>
             </li>
           </ol>
         </nav>

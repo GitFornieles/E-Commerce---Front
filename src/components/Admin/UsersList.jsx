@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import UserItem from "./UserItem";
+import { Link } from "react-router-dom";
 
 const UsersList = () => {
   const user = useSelector((state) => state.user);
@@ -25,7 +26,9 @@ const UsersList = () => {
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
-              <a href="http://localhost:3000/">Home</a>
+              <Link to="/">
+                <p>Home</p>
+              </Link>
             </li>
           </ol>
         </nav>
