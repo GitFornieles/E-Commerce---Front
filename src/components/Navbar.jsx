@@ -1,5 +1,5 @@
 import React from "react";
-import "../Styles/Navbar.css";
+import "../styles/Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";

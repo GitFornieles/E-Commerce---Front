@@ -1,9 +1,9 @@
 import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
-import "../Styles/GrillaDeProductos.css";
+import "../styles/GrillaDeProductos.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 
 const GrillaDeProductos = () => {
@@ -14,11 +14,7 @@ const [productos, setProductos] = useState([])
 //se utiliza useEffect para hacer el pedido axios a la ruta de productos
 useEffect(() => {
   axios.get("http://localhost:8000/api/products").then((res) => res.data).then((productos) => setProductos(productos))}, [])
- 
-// hay que agregar la funcionalidad del boton "AGREGAR" ====> esto esta pendiente <====
-const handleClickAgregar = () => {
-  axios.post("http://localhost:8000/api/products/add", )
-}
+
 
   return (
     <>
@@ -42,7 +38,6 @@ const handleClickAgregar = () => {
                 <button
                   type="button"
                   className="btn btn-secondary btn-sm btn-color" id="agregar"
-                  onClick={handleClickAgregar}
                 >
                   <span className="glyphicon glyphicon-shopping-cart" ></span>
                   <b> Agregar </b>

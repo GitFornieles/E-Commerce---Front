@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Logo from "../img/logo.jpg";
-import "../Styles/Navbar.css";
+import "../styles/Navbar.css";
 import GrillaDeProductos from "./GrillaDeProductos";
 
 const Home = () => {
@@ -32,7 +33,54 @@ const Home = () => {
       </div>
 
       <div>
-        <GrillaDeProductos />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-start",
+          }}
+        >
+          <div className="dropdown" style={{marginLeft:"40px"}}>
+            <button
+              className="btn btn-secondary dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Categorias
+            </button>
+            <ul className="dropdown-menu">
+            <Link to="categorie/Velas">
+              <li>
+                <a className="dropdown-item" href="#">
+                  Velas
+                </a>
+              </li>
+              </Link>
+              <Link to="categorie/Difusores">
+              <li>
+                <a className="dropdown-item" href="#">
+                Difusores
+                </a>
+              </li>
+              </Link>
+              <Link to="categorie/Aromatizadores">
+              <li>
+                <a className="dropdown-item" href="#">
+                Aromatizadores
+                </a>
+              </li>
+              </Link>
+              <Link to="categorie/Escencias">
+              <li>
+                <a className="dropdown-item" href="#">
+                Escencias
+                </a>
+              </li>
+              </Link>
+            </ul>
+          </div>
+          
+        </div>
       </div>
     </div>
   );

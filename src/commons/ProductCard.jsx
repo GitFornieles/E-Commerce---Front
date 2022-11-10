@@ -1,32 +1,27 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "../Styles/ProductCard.css";
+import "../styles/ProductCard.css";
 import { useLocation } from "react-router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { increase, decrease } from "../store/count";
 import { Link } from "react-router-dom";
+import userEvent from "@testing-library/user-event";
 
 const ProductCard = () => {
-  const counter = useSelector((state) => state.count.value);
   const [productos, setProductos] = useState([]);
   const producto = useLocation().pathname.split("/")[2];
-  console.log(producto);
   const productoIndividual = productos[producto - 1];
+  const [comentarios, setComentarios] = useState([]);
+  const IdProducto = parseInt(producto);
+  const user = useSelector((state) => state.user)
 
-  const dispatch = useDispatch();
-
-  console.log(counter);
-
-  const handleClickSumar = () => {
-    dispatch(increase());
-  };
-
-  const handleClickRestar = () => {
-    dispatch(decrease());
-  };
-
-  console.log(productoIndividual);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8000/api/reviews/comentarios/${IdProducto}`)
+      .then((res) => res.data)
+      .then((comentarios) => setComentarios(comentarios));
+  }, []);
 
   useEffect(() => {
     axios
@@ -35,10 +30,11 @@ const ProductCard = () => {
       .then((productos) => setProductos(productos));
   }, []);
 
-  console.log(productos);
+const ratingProducto = ((comentarios.reduce((acc, el) => acc + el.rating, 0))/comentarios.length).toFixed(2)
+
 
   return (
-    <div>
+    <div >
       <div>
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb">
@@ -55,17 +51,24 @@ const ProductCard = () => {
           marginRight: "15%",
         }}
       >
-        <Link to="calificar">
-        <button className="btn btn-primary">
-          {" "}
-          {productos.rating} .<i className="fa-solid fa-ranking-star"></i>
-        </button>
-        </Link>
+
+        {user.id ? (<Link to="calificar">
+          <button className="btn btn-primary">
+          {(ratingProducto === "NaN") ? "Producto Sin calificar" : ratingProducto}
+            <i className="fa-solid fa-ranking-star" style={{marginLeft:"2%"}}></i>
+          </button>
+        </Link>) : 
+          (<span >
+          {(ratingProducto === "NaN") ? "Producto Sin calificar" : ratingProducto}
+            <i className="fa-solid fa-ranking-star" style={{marginLeft:"2%"}}></i>
+          </span>)
+        }   
+
       </div>
       {/* _________________ */}
 
       <div id="alinearcard">
-        <div className="card mb-3" style={{ width: "70%" }}>
+        <div className="card mb-3" style={{ width: "70%", backgroundColor:"faedcd"}}>
           <div className="row g-0">
             <div className="col-md-4">
               <img
@@ -87,16 +90,14 @@ const ProductCard = () => {
                     type="button"
                     className="btn btn-primary"
                     style={{ marginRight: "20px" }}
-                    onClick={handleClickRestar}
                   >
                     <i className="fa-solid fa-minus"></i>
                   </button>
-                  <span> {counter} </span>
+                  <span> 0 </span>
                   <button
                     type="button"
                     className="btn btn-primary"
                     style={{ marginLeft: "20px" }}
-                    onClick={handleClickSumar}
                   >
                     <i className="fa-solid fa-plus"></i>
                   </button>
@@ -122,38 +123,38 @@ const ProductCard = () => {
 
       {/* _______________________ */}
 
-      <div style={{display:"flex", flexWrap:"wrap", justifyContent:"center"}}>
-        <div class="col-sm-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Juan Perez</h5>
-              <p class="card-text" >
-                Compre el producto la semana pasada, y realmente es muy bueno.
-                lo recomiendo 100%
-              </p>
-              <button className="btn btn-primary"> <i class="fa-solid fa-star" > </i> 5 </button>
-       
+<div style={{display:"flex", justifyContent:"center", marginBottom:"3%", marginTop:"3%"}}> <h3 >RESEÑAS DEL PRODUCTO </h3> </div>
+
+      <div style={{marginLeft:"20%", marginRight:"20%"}}>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-evently",
+          }}
+        >
+          {comentarios.map((review) => (
+            <div className="col-sm-4">
+              <div className="card" style={{backgroundColor:"aliceBlue"}}>
+                <div className="card-body">
+                  <p className="card-text">{review.review}</p>
+                  <button className="btn btn-primary">
+                    {" "}
+                    <i className="fa-solid fa-star"> </i> {review.rating}{" "}
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        ></div>
       </div>
-      <div style={{display:"flex", flexWrap:"wrap", justifyContent:"center"}}>
-        <div class="col-sm-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Pepe Argento</h5>
-              <p class="card-text" >
-                realmente la atención y la calidad del producto es muy buena, siempre compro el mismo producto.
-              </p>
-              <button className="btn btn-primary"> <i class="fa-solid fa-star" > </i> 5 </button>
-       
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
     </div>
   );
 };
