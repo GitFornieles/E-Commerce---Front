@@ -15,9 +15,9 @@ const Login = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const [error,setError]=useState("")
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       // POST user credentials:
       const { data } = await axios.post(
@@ -27,7 +27,6 @@ const Login = () => {
           password: password.value,
         }
       );
-
       // Set userState:
       dispatch(userLogin(data.user));
       dispatch(setCart({cartId:data.cartId,productos:data.products}))
@@ -41,10 +40,6 @@ const Login = () => {
     } catch (err) {
       setError(err.response.data);
     }
-  };
-
-  const handleUser = () => {
-    console.log(user);
   };
 
   return (

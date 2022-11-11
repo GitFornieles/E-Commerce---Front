@@ -15,7 +15,7 @@ const GrillaDeProductos = () => {
       .get("http://localhost:8000/api/products")
       .then((res) => res.data)
       .then((productos) => setProductos(productos));
-  }, [productos]);
+  }, []);
 
   return (
     <>

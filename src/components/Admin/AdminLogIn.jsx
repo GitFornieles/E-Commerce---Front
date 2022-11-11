@@ -24,7 +24,6 @@ const AdminLogIn = () => {
         }
       );
 
-      console.log(data);
 
       // Set userState:
       dispatch(userLogin(data.dataValues));

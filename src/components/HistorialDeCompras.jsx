@@ -18,7 +18,6 @@ const HistorialDeCompras = () => {
       .then((carritos) => setCarritos(carritos.data));
   }, []);
 
-  console.log("CARRITOS", carritos);
 
   return (
     <div>

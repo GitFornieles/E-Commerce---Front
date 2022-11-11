@@ -6,15 +6,16 @@ export const addProd = createAction("ADDPROD");
 export const remProd = createAction("REMPROD");
 export const vaciar = createAction("VACIAR");
 
-const initialState = { cartId: 0, productos: [],total:0 };
+const initialState = JSON.parse(localStorage.getItem("cart")) || { cartId: 0, productos: [],total:0 };
 
 //combinamos todas las acciones en un reducer
 
 const cartReducer = createReducer(initialState, {
   [setCart]: (state, action) => {
     let total=0
+    let productos=action.payload.productos
     if(state.productos){
-        total=state.productos.reduce((acumulador,elemento)=>{
+        total=productos.reduce((acumulador,elemento)=>{
             acumulador=acumulador+elemento.qty*elemento.purchasedPrice
             return acumulador
         },0)
@@ -22,9 +23,10 @@ const cartReducer = createReducer(initialState, {
     return {...action.payload,total:total};
   },
   [addProd]: (state, action) => {
-    let total
+    let total=0
+    let productos=action.payload.productos
     if(state.productos){
-        total=state.productos.reduce((acumulador,elemento)=>{
+        total=productos.reduce((acumulador,elemento)=>{
             acumulador=acumulador+elemento.qty*elemento.purchasedPrice
             return acumulador
         },0)
@@ -32,9 +34,10 @@ const cartReducer = createReducer(initialState, {
     return {...action.payload,total:total}
   },
   [remProd]: (state, action) => {
-    let total
+    let total=0
+    let productos=action.payload.productos
     if(state.productos){
-        total=state.productos.reduce((acumulador,elemento)=>{
+        total=productos.reduce((acumulador,elemento)=>{
             acumulador=acumulador+elemento.qty*elemento.purchasedPrice
             return acumulador
         },0)

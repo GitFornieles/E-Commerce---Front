@@ -17,10 +17,14 @@ const VistaCheckout = () => {
 
   const confirm = (e) => {
     e.preventDefault();
+    //Armo array con información de cantidades y productId para pasar al Server y modificar disponibilidades
+    let consumos=cart.productos.map(elemento=>{return {productId:elemento.productId,sold:elemento.qty}})
+    console.log(consumos)
     const payment = {
       cartId: cart.cartId,
       total: cart.total,
       ownerId: user.id,
+      consumos:consumos
     };
     axios
       .post("http://localhost:8000/api/payment/", payment)

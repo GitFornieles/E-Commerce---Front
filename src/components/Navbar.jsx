@@ -1,12 +1,9 @@
 import React from "react";
 import "../Styles/Navbar.css";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
-import { userLogOut } from "../store/user";
+import { useSelector } from "react-redux";
 import A from "../img/A.jpg";
 import MenuDesplegable from "./MenuDesplegable";
-import {vaciar} from "../store/cart"
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
@@ -14,8 +11,8 @@ const Navbar = () => {
   const logonav = {
     width: "4%",
     height: "4%",
-    objectPosition: " center"
-  }
+    objectPosition: " center",
+  };
 
   return (
     <div>
@@ -36,14 +33,12 @@ const Navbar = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          
-            <img
-              src={A}
-              alt="Logo"
-              style={logonav}
-              className="d-inline-block align-text-top"
-            />
-          
+          <img
+            src={A}
+            alt="Logo"
+            style={logonav}
+            className="d-inline-block align-text-top"
+          />
 
           <div
             className="collapse navbar-collapse p-2"
@@ -119,9 +114,18 @@ const Navbar = () => {
                     </a>
                   </li>
                 </Link>
+                <Link to="/">
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Todos
+                    </a>
+                  </li>
+                </Link>
               </ul>
             </div>
-
+            <Link to="/">
+              <button className="btn btn-secondary">Home</button>
+            </Link>
             <form className="d-flex" role="search">
               <input
                 className="form-control me-2"

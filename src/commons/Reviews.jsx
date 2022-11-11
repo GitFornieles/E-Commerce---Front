@@ -8,7 +8,7 @@ import logo from "../assets/logo.jpg";
 const Reviews = () => {
   const producto = useLocation().pathname.split("/")[2];
   const [newReview, setNewReview] = useState("");
-  const [rating, setRating] = useState("");
+  const [rating, setRating] = useState(5);
   const user = useSelector((state) => state.user.id);
   const navigate = useNavigate()
 

@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
 import "../Styles/CarritoItem.css";
+import { Link } from "react-router-dom";
 
 const CarritoItem = ({ producto,qty,id,handlePlus,handleMinus }) => {
   const imgStyles = {
@@ -11,7 +12,9 @@ const CarritoItem = ({ producto,qty,id,handlePlus,handleMinus }) => {
     <>
       <tr>
         <td scope="row">{id}</td>
+        <Link to={`../grilla/${producto.id}`} style={{ textDecoration: "none" }}>
         <td>{producto.name}</td>
+        </Link>
         <td>{producto.price}</td>
         <td>{producto.stock}</td>
         <td id="boton">

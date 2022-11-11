@@ -38,12 +38,6 @@ function App() {
         <Route path="/historial_de_compras" element={<HistorialDeCompras />} />
         <Route path="/admin/add_product" element={<AddProducts />} />
         <Route path="/admin/edit_product/:id" element={<AdminProducts />} />
-
-
-
-
-
-
         <Route path="/checkout" element={<VistaCheckout/>}/>
       </Routes>
     </div>

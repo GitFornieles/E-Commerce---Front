@@ -24,7 +24,7 @@ const Carrito = () => {
   }, []);
   cart = useSelector((state) => state.cart);
 
-  const handlePlus= (e,disponibilidad)=>{
+  const handlePlus = (e,disponibilidad)=>{
     const productId=e.target.id
     // El código de abajo es para romper la relación entre las variables que trabajo y el estado cart; de lo contrario siempre devolvía que es "read-only"
     let newCart=JSON.parse(JSON.stringify(cart))
@@ -112,9 +112,11 @@ const Carrito = () => {
         <button className="btn btn-secondary btn-sm">
                 BORRAR
         </button>
+        <Link to="/">
         <button className="btn btn-secondary btn-sm" onClick={handleSave}>
                 GUARDAR
         </button>
+        </Link>
       </div>
     </div>
   );

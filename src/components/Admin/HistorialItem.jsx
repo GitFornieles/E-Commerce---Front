@@ -12,8 +12,6 @@ const HistorialItem = ({ carrito }) => {
       .then((result) => setCompra(result.data));
   }, []);
 
-  console.log("COMPRA:",compra);
-
   return (
     <tr>
       <td></td>

@@ -26,9 +26,8 @@ const ProductItem = ({ product }) => {
   };
 
   return (
-    <div className="card" style={{ width: "25rem" }} key={product.id}>
+    <div className="card" style={{ width: "20rem" }} key={product.id}>
       <img src={product.mainImage} alt="ACA VA LA FOTO" />
-
       <div className="card-body" id="cardposition">
         <h5 className="card-title">{product.price} $</h5>
         <Link to={`../grilla/${product.id}`} style={{ textDecoration: "none" }}>
