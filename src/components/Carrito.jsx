@@ -79,16 +79,15 @@ const Carrito = () => {
 
   const handleDelete = (e) => {
     const productId = e.currentTarget.id;
-    // axios
-    //   .post("http://localhost:8000/api/cart/remProduct", {
-    //     cartId: cart.cartId,
-    //     productId: productId,
-    //   })
-    //   .then(() => {
-    //     return dispatch(elimProd(productId))
-    //   });
-    console.log("dispatch")
-    dispatch(elimProd(productId))
+    axios
+      .post("http://localhost:8000/api/cart/remProduct", {
+        cartId: cart.cartId,
+        productId: productId,
+      })
+      .then(() => {
+        return dispatch(elimProd(productId))
+      });
+
   };
 
   const handleEmptyCart = () => {

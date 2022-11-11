@@ -55,9 +55,10 @@ const cartReducer = createReducer(initialState, {
     return action.payload;
   },
   [elimProd]:(state,action)=>{
+
     const productId=action.payload
     const newProductos=state.productos.filter(elemento=>elemento.productId!=productId)
-    return {...state,newProductos}
+    return {...state,productos:newProductos}
   }
 });
 
