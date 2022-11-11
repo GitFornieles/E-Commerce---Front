@@ -16,9 +16,6 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="container" class="Difusores">
-        AROMAS PARA EL HOGAR
-      </div>
       <nav className="navbar navbar-expand-lg navbar-dark" id="nav">
         <div class="container-fluid">
           <button

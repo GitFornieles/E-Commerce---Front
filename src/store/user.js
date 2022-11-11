@@ -29,7 +29,7 @@ const userReducer = createReducer(storedUser, {
     // Vacio el localStorage:
     localStorage.removeItem("user");
 
-    return initialState;
+    return {};
   },
 });
 

@@ -4,7 +4,9 @@ import { createAction, createReducer } from "@reduxjs/toolkit";
 export const setCart = createAction("SETCART");
 export const addProd = createAction("ADDPROD");
 export const remProd = createAction("REMPROD");
+export const elimProd = createAction("ELIMPROD");
 export const vaciar = createAction("VACIAR");
+export const cartLogOut = createAction("CARTLOGOUT");
 
 const initialState = JSON.parse(localStorage.getItem("cart")) || { cartId: 0, productos: [],total:0 };
 
@@ -45,9 +47,18 @@ const cartReducer = createReducer(initialState, {
     return {...action.payload,total:total}
   },
   [vaciar]: (state, action) => {
+    const newState={...state,productos:[],total:0}
+    return newState;
+  },
+  [cartLogOut]:(state,action)=>{
     localStorage.removeItem("cart");
     return action.payload;
   },
+  [elimProd]:(state,action)=>{
+    const productId=action.payload
+    const newProductos=state.productos.filter(elemento=>elemento.productId!=productId)
+    return {...state,newProductos}
+  }
 });
 
 export default cartReducer;

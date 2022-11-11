@@ -26,7 +26,7 @@ useEffect(() => {
               <div className="card-body" id="cardposition">
                 <h5 className="card-title">{categoria.price} $</h5>
                 <Link to={`../grilla/${categoria.id}`} style={{textDecoration:"none"}} >
-                <p className="card-text" style={{fontFamily:"fantasy", fontSize:"20px"}}> {categoria.name} </p>
+                <p className="card-text" style={{fontSize:"20px"}}> {categoria.name} </p>
                 </Link>
                 
                 <br />

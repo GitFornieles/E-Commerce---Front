@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { userLogOut } from "../store/user";
-import { vaciar } from "../store/cart";
+import { cartLogOut } from "../store/cart";
 
 const MenuDesplegable = () => {
   const user = useSelector((state) => state.user);
@@ -16,7 +16,7 @@ const MenuDesplegable = () => {
 
       // Setteo un user vacio:
       dispatch(userLogOut());
-      dispatch(vaciar({}));
+      dispatch(cartLogOut({}));
 
       // Vuelvo a la pagina de inicio:
       navigate("/");
