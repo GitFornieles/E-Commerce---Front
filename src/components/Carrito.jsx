@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { setCart } from "../store/cart";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import { addProd, remProd, vaciar,elimProd } from "../store/cart";
+import { addProd, remProd, vaciar, elimProd } from "../store/cart";
 const Carrito = () => {
   let cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
@@ -85,9 +85,8 @@ const Carrito = () => {
         productId: productId,
       })
       .then(() => {
-        return dispatch(elimProd(productId))
+        return dispatch(elimProd(productId));
       });
-
   };
 
   const handleEmptyCart = () => {
@@ -143,9 +142,13 @@ const Carrito = () => {
         <h4>{cart.total}</h4>
       </div>
       <div id="botonera">
-        <button className="btn btn-secondary btn-sm" onClick={handlePurchase}>
-          COMPRAR
-        </button>
+        {cart.total > 0 ? (
+          <button className="btn btn-secondary btn-sm" onClick={handlePurchase}>
+            COMPRAR
+          </button>
+        ) : (
+          ""
+        )}
         <button className="btn btn-secondary btn-sm" onClick={handleEmptyCart}>
           BORRAR
         </button>

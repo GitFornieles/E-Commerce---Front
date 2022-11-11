@@ -55,10 +55,16 @@ const cartReducer = createReducer(initialState, {
     return action.payload;
   },
   [elimProd]:(state,action)=>{
-
+    let total=0
     const productId=action.payload
     const newProductos=state.productos.filter(elemento=>elemento.productId!=productId)
-    return {...state,productos:newProductos}
+    if(newProductos){
+        total=newProductos.reduce((acumulador,elemento)=>{
+            acumulador=acumulador+elemento.qty*elemento.purchasedPrice
+            return acumulador
+        },0)
+    }
+    return {...state,productos:newProductos,total:total}
   }
 });
 
