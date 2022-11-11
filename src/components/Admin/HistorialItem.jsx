@@ -1,29 +1,20 @@
 import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import axios from "axios";
+import { Link } from "react-router-dom";
 
 const HistorialItem = ({ carrito }) => {
-  const [compra, setCompra] = useState({});
-
-  useEffect(() => {
-    axios
-      .post("http://localhost:8000/api/cart", { cartId: carrito.id })
-      .then((result) => setCompra(result.data));
-  }, []);
-
-  console.log("COMPRA:",compra);
 
   return (
     <tr>
-      <td></td>
-      <td>Producto</td>
-      <td>Fecha</td>
-      <td>Total</td>
+      <Link to={`/historial_de_compras/${carrito.id}`}>
+        <td>{`#${carrito.id}`}</td>
+      </Link>
+      <td>{carrito.createdAt.slice(0, 10)}</td>
+      <td>{carrito.total ? `$${carrito.total}` : "-"}</td>
       <td>{carrito.purchasedStatus ? "Comprado" : "Pendiente"}</td>
-      <td>{carrito.shippingStatus ? "Enviado" : "Pendiente"}</td>
+      <td>{carrito.shippingStatus ? "En camino" : "Pendiente"}</td>
     </tr>
   );
 };
 
 export default HistorialItem;
+

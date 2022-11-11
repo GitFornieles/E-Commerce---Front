@@ -36,15 +36,12 @@ const AddProducts = () => {
   return (
     <div>
       <div>
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <Link to="/">
-                <p>Home</p>
-              </Link>
-            </li>
-          </ol>
-        </nav>
+        <Link to="/">
+          <button className="btn btn-secondary btn-sm btn-color">
+            {" "}
+            ↩ Home{" "}
+          </button>
+        </Link>
       </div>
       <div id="alinearcard">
         <div className="card mb-3" style={{ width: "50%" }}>
