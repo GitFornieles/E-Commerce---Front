@@ -33,6 +33,11 @@ const VistaCheckout = () => {
         dispatch(setCart(newCart));
         setPago(response.payment);
       });
+    axios
+      .post("http://localhost:8000/api/mail/", { email: user.email })
+      .then((response) => {
+        alert("deberias haber recibido la confirmacion de pago en tu mail");
+      });
   };
   return (
     <>

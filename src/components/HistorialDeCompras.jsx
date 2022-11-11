@@ -18,7 +18,6 @@ const HistorialDeCompras = () => {
       .then((carritos) => setCarritos(carritos.data));
   }, []);
 
-
   return (
     <div>
       <Link to="/">
@@ -29,8 +28,7 @@ const HistorialDeCompras = () => {
         <table className="table is-hoverable is-fullwidth">
           <thead>
             <tr>
-              <th></th>
-              <th>Producto</th>
+              <th>Codigo de compra</th>
               <th>Fecha</th>
               <th>Total</th>
               <th>Estado</th>
@@ -39,9 +37,13 @@ const HistorialDeCompras = () => {
           </thead>
 
           <tbody>
-            {carritos.map((carrito, i) => (
-              <HistorialItem carrito={carrito} key={i} i={i} />
-            ))}
+            {carritos.map((carrito, i) =>
+              carrito.purchasedStatus ? (
+                <HistorialItem carrito={carrito} key={i} i={i} />
+              ) : (
+                ""
+              )
+            )}
           </tbody>
         </table>
       </section>
