@@ -5,6 +5,8 @@ import { useLocation } from "react-router";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const ProductCard = () => {
   const [comentarios, setComentarios] = useState([]);
@@ -13,6 +15,9 @@ const ProductCard = () => {
   const [producto, setProducto] = useState([]);
   const productoId = useLocation().pathname.split("/")[2];
   let [counter, setCounter] = useState(0);
+
+  // Constante alerte:
+  const MySwal = withReactContent(Swal);
 
   useEffect(() => {
     axios
@@ -50,6 +55,11 @@ const ProductCard = () => {
       cartId,
       productId,
       qty,
+    });
+
+    //ALERTA:
+    MySwal.fire({
+      title: <p>Producto agregado al carrito!</p>,
     });
   };
 

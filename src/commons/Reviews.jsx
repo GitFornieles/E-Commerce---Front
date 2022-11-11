@@ -4,17 +4,20 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router";
 import logo from "../assets/logo.jpg";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const Reviews = () => {
   const producto = useLocation().pathname.split("/")[2];
   const [newReview, setNewReview] = useState("");
   const [rating, setRating] = useState(5);
   const user = useSelector((state) => state.user.id);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const MySwal = withReactContent(Swal);
 
   const handleInput = (e) => {
-    setNewReview(e.target.value) 
-   }
+    setNewReview(e.target.value);
+  };
 
   const handleRating = (e) => {
     setRating(e.target.value);
@@ -22,13 +25,19 @@ const Reviews = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:8000/api/reviews", {
-      review: newReview,
-      rating: parseInt(rating),
-      product: parseInt(producto),
-      user: parseInt(user),
-    }).then(() => alert("Se agrego la REVIEW"))
-    navigate("/")
+    axios
+      .post("http://localhost:8000/api/reviews", {
+        review: newReview,
+        rating: parseInt(rating),
+        product: parseInt(producto),
+        user: parseInt(user),
+      })
+      .then(() =>
+        MySwal.fire({
+          title: <p>Review enviada con exito!</p>,
+        })
+      );
+    navigate("/");
   };
 
   return (
@@ -39,7 +48,11 @@ const Reviews = () => {
           style={{ width: "50%", display: "flex", justifyContent: "center" }}
         >
           <div>
-            <label for="customRange3" class="form-label" style={{fontSize:"20px"}}>
+            <label
+              for="customRange3"
+              class="form-label"
+              style={{ fontSize: "20px" }}
+            >
               {" "}
               Calificar el producto <br />
               {rating}
@@ -54,7 +67,11 @@ const Reviews = () => {
               onChange={handleRating}
               required
             ></input>
-            <label for="customRange3" className="form-label" style={{fontSize:"20px"}}>
+            <label
+              for="customRange3"
+              className="form-label"
+              style={{ fontSize: "20px" }}
+            >
               {" "}
               ¿Que te parecio el producto?{" "}
             </label>{" "}

@@ -3,6 +3,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { setCart } from "../store/cart";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const VistaCheckout = () => {
   const user = useSelector((state) => state.user);
@@ -10,6 +12,7 @@ const VistaCheckout = () => {
   const [medio, setMedio] = useState("");
   const dispatch = useDispatch();
   const [pago, setPago] = useState({});
+  const MySwal = withReactContent(Swal);
 
   const handlePayment = (e) => {
     setMedio(e.target.id);
@@ -18,13 +21,15 @@ const VistaCheckout = () => {
   const confirm = (e) => {
     e.preventDefault();
     //Armo array con información de cantidades y productId para pasar al Server y modificar disponibilidades
-    let consumos=cart.productos.map(elemento=>{return {productId:elemento.productId,sold:elemento.qty}})
-    console.log(consumos)
+    let consumos = cart.productos.map((elemento) => {
+      return { productId: elemento.productId, sold: elemento.qty };
+    });
+    console.log(consumos);
     const payment = {
       cartId: cart.cartId,
       total: cart.total,
       ownerId: user.id,
-      consumos:consumos
+      consumos: consumos,
     };
     axios
       .post("http://localhost:8000/api/payment/", payment)
@@ -36,7 +41,11 @@ const VistaCheckout = () => {
     axios
       .post("http://localhost:8000/api/mail/", { email: user.email })
       .then((response) => {
-        alert("deberias haber recibido la confirmacion de pago en tu mail");
+        MySwal.fire({
+          title: (
+            <p>{`Compra realizada con éxito! mail enviado a: ${user.email}`}</p>
+          ),
+        });
       });
   };
   return (

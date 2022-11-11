@@ -7,11 +7,15 @@ import { setCart } from "../store/cart";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { addProd, remProd, vaciar, elimProd } from "../store/cart";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
 const Carrito = () => {
   let cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const MySwal = withReactContent(Swal);
 
   useEffect(() => {
     axios
@@ -66,6 +70,11 @@ const Carrito = () => {
       acum.push({ id: elemento.id, qty: elemento.qty });
       return acum;
     }, []);
+
+    MySwal.fire({
+      title: <p>Carrito guardado</p>,
+    });
+
     return axios.put(
       "http://localhost:8000/api/cart/saveCart",
       cambioCantidades
@@ -152,11 +161,10 @@ const Carrito = () => {
         <button className="btn btn-secondary btn-sm" onClick={handleEmptyCart}>
           BORRAR
         </button>
-        <Link to="/">
-          <button className="btn btn-secondary btn-sm" onClick={handleSave}>
-            GUARDAR
-          </button>
-        </Link>
+
+        <button className="btn btn-secondary btn-sm" onClick={handleSave}>
+          GUARDAR
+        </button>
       </div>
     </div>
   );
