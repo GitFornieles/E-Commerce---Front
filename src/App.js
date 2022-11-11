@@ -17,6 +17,7 @@ import HistorialDeCompras from "./components/HistorialDeCompras";
 import AddProducts from "./components/Admin/AddProducts";
 import AdminProducts from "./components/Admin/AdminProducts";
 import CompraItem from "./commons/CompraItem";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path="/checkout" element={<VistaCheckout />} />
         <Route path="/historial_de_compras/:id" element={<CompraItem />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
