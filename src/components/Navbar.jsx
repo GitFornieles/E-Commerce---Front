@@ -121,15 +121,9 @@ const Navbar = () => {
               </ul>
             </div>
             <Link to="/">
-              <button className="btn btn-secondary">Home</button>
+              <button className="btn btn-secondary" style={{marginRight: "20px"}}>Home</button>
             </Link>
             <form className="d-flex" role="search">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Buscar"
-                aria-label="Buscar"
-              />
               <Link to="/carrito">
                 <button className="btn btn-outline-success" type="carrito">
                   <ion-icon name="cart-sharp"></ion-icon>
